@@ -19,7 +19,7 @@
   #exampleInputPassword1{
       margin-bottom: 20px;
   }
-  #logInID{
+  #logInID, singInID {
       color: rgb(63, 23, 23);
   }
 
