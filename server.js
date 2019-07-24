@@ -19,19 +19,21 @@ app.set("view engine", "handlebars");
 
 //route to index//
 app.get('/', (req, res) => {
-    res.render('signIn');
+    res.render('signIn', { title: "Welcome to Julias Child!"});
 });
 //route to 404//
 app.get('/404', (req, res) => {
-    res.render('404');
+    res.render('404', { title: "ERROR 404"});
 });
 //route to index//
 app.get('/example', (req, res) => {
-    res.render('example');
+    res.render('example', { title: "Example Title"});
 });
 //route to index//
 app.get('/index', (req, res) => {
-    res.render('index');
+    res.render('index', { 
+        title: "Index", 
+        recipeCard: "{{??i think this will be a card with API on it right?}}"});
 });
 
 
