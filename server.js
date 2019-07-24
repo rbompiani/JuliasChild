@@ -18,6 +18,9 @@ app.engine("handlebars", exphbs({ defaultLayout: "main"}));
 app.set("view engine", "handlebars");
 
 //build the routes for future use//
+app.get('/', (req, res) => {
+    res.render('index');
+});
 // var routes= require("/");
 //now use the routes//
 // app.use(routes);
