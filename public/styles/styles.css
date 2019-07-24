@@ -1,0 +1,44 @@
+/* LOG IN PAGE  */
+.bodyClassLogin{
+    background-image: url(tablewareimage.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-attachment: fixed; 
+    height:100%;
+    width:100%;
+    margin:0;
+    display:flex;
+}
+
+  form {
+    margin:auto;
+     padding-top: 300px;
+    /* border-style: solid;
+    border-color: red; */
+  }
+  #exampleInputPassword1{
+      margin-bottom: 20px;
+  }
+  #logInID{
+      color: rgb(63, 23, 23);
+  }
+
+  /* MAINPAGE */
+#recipeCards{
+    margin: 25px 25px 25px 25px;
+    border-style: solic;
+    border-color: red;
+    padding: 25, 25, 25, 25;
+}
+
+#cardID{
+    background-color:red;
+}
+/* GROCERY PAGE */
+#itemsToBuyTitle{
+    text-align: center;
+    height:100%;
+    width:100%;
+    margin: auto;
+    display: inline-block;
+}
