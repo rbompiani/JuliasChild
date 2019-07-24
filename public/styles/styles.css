@@ -1,6 +1,6 @@
 /* LOG IN PAGE  */
 .logIncontainer, .SignIncontainer {
-    background-image: url(/public/images/yellow.jpeg);
+    background-image: url(/images/yellow.jpeg);
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-attachment: fixed; 
@@ -24,6 +24,11 @@
   }
 
   /* index.handlebars page */
+  #heartImage{
+      width: 16px;
+      height: 16px;
+      cursor: pointer; 
+  }
 #home{
     background-image: url(/public/images/yellow.jpeg);
     background-repeat: no-repeat;
