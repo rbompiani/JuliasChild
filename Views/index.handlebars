@@ -1,26 +1,27 @@
 <h1> this is gonna be the recipe page</h1>
 
-<p> an example of the card we'll use for each recipe is {{recipeCard}} </p>
+<p> an example of the card below </p>
 <!-- CARD -->
+{{#each data}}
     <div class="row">
         <div class="col-sm-3" id="cardID">
             <div class="card" id="recipeCards" style="width: 12rem;">
-                <img src="wrapimage.jpeg" class="card-img-top" alt="...">
+                <img src={{recipeImage}} class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">Recipe title</h5>
-                    <p class="card-text">A description of the food style and flava.</p>
+                    <h5 class="card-title">{{recipeTitle}}</h5>
+                    <p class="card-text">{{recipeDesc}}</p>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Calories: 600</li>
-                    <li class="list-group-item">Nutrition?</li>
+                    <li class="list-group-item">{{calories}}</li>
+                    <li class="list-group-item">{{nutrition}}</li>
                 </ul>
                 <div class="card-body">
                     <a href="#" class="card-link" id="pullUpModalLink">Link to the Modal that pops up the recipe</a>
-                    <!-- <a href="#" class="card-link">Another link</a> -->
+                  <img id="heartImage" src= "/images/heart.png">
                 </div>
             </div>
         </div>
     </div>
-
+{{/each}}
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>

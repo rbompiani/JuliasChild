@@ -5,9 +5,13 @@ var bodyParser= require("body-parser");
 
 var exphbs= require("express-handlebars");
 
+var path= require ("path");
+
 //run express//
 var app= express();
 var PORT= process.env.PORT || 3000;
+
+app.use(express.static(__dirname + '/public'));
 
 //use the body parser//
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -19,6 +23,7 @@ app.set("view engine", "handlebars");
 
 //route to index//
 app.get('/', (req, res) => {
+    
     res.render('signIn', { title: "Welcome to Julias Child!"});
 });
 //route to 404//
@@ -31,10 +36,32 @@ app.get('/example', (req, res) => {
 });
 //route to index//
 app.get('/index', (req, res) => {
+    // ** backend person- replace this info with the DB info // -sam
+    var recipes= [
+       {
+        title: "Burrito Bowl", 
+        recipeImage: "https://www.mercurynews.com/wp-content/uploads/2017/07/blog-chipotle-parks-burrito.jpg",
+        recipeTitle: "Burrito Bowl",
+        recipeDesc: "A healthy option for food",
+        calories: "400",
+        nutrition: "Vegan, gluten free, yada",
+        },
+        {
+            title: "Salmon", 
+            recipeImage: "cute image",
+            recipeTitle: "Salmon",
+            recipeDesc: "A healthy option for food",
+            calories: "200",
+            nutrition: "Vegan, gluten free, yada",
+            }
+    ]
     res.render('index', { 
-        title: "Index", 
-        recipeCard: "{{??i think this will be a card with API on it right?}}"});
+        data: recipes
+    });
 });
+// make a route to "likes" for the #heartImage (check out bamazon assingment)
+//app.post("/api/:ID") "update product where id=id" or (subtract from inventory on the bamazon)
+//look into sorting function on the database stuff ie "Most liked recipes"
 
 
 //make it listen to express server//
