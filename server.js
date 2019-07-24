@@ -17,13 +17,23 @@ app.use(bodyParser.json());
 app.engine("handlebars", exphbs({ defaultLayout: "main"}));
 app.set("view engine", "handlebars");
 
-//build the routes for future use//
+//route to index//
 app.get('/', (req, res) => {
+    res.render('signIn');
+});
+//route to 404//
+app.get('/404', (req, res) => {
+    res.render('404');
+});
+//route to index//
+app.get('/example', (req, res) => {
+    res.render('example');
+});
+//route to index//
+app.get('/index', (req, res) => {
     res.render('index');
 });
-// var routes= require("/");
-//now use the routes//
-// app.use(routes);
+
 
 //make it listen to express server//
 app.listen(PORT, function(){
