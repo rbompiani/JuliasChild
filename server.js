@@ -59,6 +59,7 @@ app.get('/index', (req, res) => {
         data: recipes
     });
 });
+                        // **HEY GURL HEY** DB stuff?  //
 // make a route to "likes" for the #heartImage (check out bamazon assingment)
 //app.post("/api/:ID") "update product where id=id" or (subtract from inventory on the bamazon)
 //look into sorting function on the database stuff ie "Most liked recipes"

@@ -1,5 +1,5 @@
 /* LOG IN PAGE  */
-.logIncontainer, .SignIncontainer {
+.bodyClassLogin {
     background-image: url(/images/yellow.jpeg);
     background-repeat: no-repeat;
     background-size: 100% 100%;
@@ -7,22 +7,13 @@
     height:100%;
     width:100%;
     margin:0;
-    display:flex;
+    /* display:flex; */
 }
 
-  form {
-    margin:auto;
-     padding-top: 300px;
-    /* border-style: solid;
-    border-color: red; */
-  }
   #exampleInputPassword1{
       margin-bottom: 20px;
   }
-  #logInID, singInID {
-      color: rgb(63, 23, 23);
-  }
-
+ 
   /* index.handlebars page */
   #heartImage{
       width: 16px;
