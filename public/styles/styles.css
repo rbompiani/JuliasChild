@@ -46,7 +46,7 @@
     padding: 25, 25, 25, 25;
 }
 
-#cardID{
+.recipeCard{
     background-color:red;
 }
 /* GROCERY PAGE */
@@ -56,4 +56,8 @@
     width:100%;
     margin: auto;
     display: inline-block;
+}
+
+.modalImg {
+    width: 100%;
 }

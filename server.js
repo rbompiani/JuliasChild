@@ -45,15 +45,19 @@ app.get('/index', (req, res) => {
         recipeDesc: "A healthy option for food",
         calories: "400",
         nutrition: "Vegan, gluten free, yada",
+        ingredientLines : [ "1 chicken, about 3.5 to 4 pounds", "1 lemon", "1 blood orange", "1 tangerine or clementine", "Kosher salt", "1/2 cup chicken broth" ],
+        instructions: ["step1", "step2", "step3", "step4"]
         },
         {
-            title: "Salmon", 
-            recipeImage: "cute image",
-            recipeTitle: "Salmon",
-            recipeDesc: "A healthy option for food",
-            calories: "200",
-            nutrition: "Vegan, gluten free, yada",
-            }
+        title: "Salmon", 
+        recipeImage: "https://www.inspiredtaste.net/wp-content/uploads/2018/09/Easy-Oven-Baked-Salmon-Recipe-2-1200.jpg",
+        recipeTitle: "Salmon",
+        recipeDesc: "A healthy option for food",
+        calories: "200",
+        nutrition: "Vegan, gluten free, yada",
+        ingredientLines : [ "1 chicken, about 3.5 to 4 pounds", "1 lemon", "1 blood orange", "1 tangerine or clementine", "Kosher salt", "1/2 cup chicken broth" ],
+        instructions: ["step1", "step2", "step3", "step4"]
+        }
     ]
     res.render('index', { 
         data: recipes
