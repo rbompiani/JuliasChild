@@ -47,13 +47,13 @@ app.get('/index', (req, res) => {
         nutrition: "Vegan, gluten free, yada",
         },
         {
-            title: "Salmon", 
-            recipeImage: "cute image",
-            recipeTitle: "Salmon",
-            recipeDesc: "A healthy option for food",
-            calories: "200",
-            nutrition: "Vegan, gluten free, yada",
-            }
+        title: "Salmon", 
+        recipeImage: "cute image",
+        recipeTitle: "Salmon",
+        recipeDesc: "A healthy option for food",
+        calories: "200",
+        nutrition: "Vegan, gluten free, yada",
+        }
     ]
     res.render('index', { 
         data: recipes

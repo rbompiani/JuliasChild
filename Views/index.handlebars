@@ -2,9 +2,9 @@
 
 <p> an example of the card below </p>
 <!-- CARD -->
-{{#each data}}
+{{#each data as |item i|}}
     <div class="row">
-        <div class="col-sm-3" id="cardID">
+        <div class="col-sm-3 recipeCard" id="{{i}}" data-toggle="modal" data-target="#recipeModal{{i}}">
             <div class="card" id="recipeCards" style="width: 12rem;">
                 <img src={{recipeImage}} class="card-img-top" alt="...">
                 <div class="card-body">
@@ -22,6 +22,16 @@
             </div>
         </div>
     </div>
+
+    <!-- create modals for each recipe -->
+    <div id="recipeModal{{i}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          {{recipeTitle}}
+        </div>
+      </div>
+    </div>
+
 {{/each}}
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>
