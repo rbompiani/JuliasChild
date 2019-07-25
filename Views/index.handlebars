@@ -3,37 +3,89 @@
 <p> an example of the card below </p>
 <!-- CARD -->
 {{#each data as |item i|}}
-    <div class="row">
-        <div class="col-sm-3 recipeCard" id="{{i}}" data-toggle="modal" data-target="#recipeModal{{i}}">
-            <div class="card" id="recipeCards" style="width: 12rem;">
-                <img src={{recipeImage}} class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">{{recipeTitle}}</h5>
-                    <p class="card-text">{{recipeDesc}}</p>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">{{calories}}</li>
-                    <li class="list-group-item">{{nutrition}}</li>
-                </ul>
-                <div class="card-body">
-                    <a href="#" class="card-link" id="pullUpModalLink">Link to the Modal that pops up the recipe</a>
-                  <img id="heartImage" src= "/images/heart.png">
-                </div>
+<div class="row">
+    <div class="col-sm-3 recipeCard" id="{{i}}" data-toggle="modal" data-target="#recipeModal{{i}}">
+        <div class="card" id="recipeCards" style="width: 12rem;">
+            <img src={{recipeImage}} class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{recipeTitle}}</h5>
+                <p class="card-text">{{recipeDesc}}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">{{calories}}</li>
+                <li class="list-group-item">{{nutrition}}</li>
+            </ul>
+            <div class="card-body">
+                <img id="heartImage" src="/images/heart.png">
             </div>
         </div>
     </div>
+</div>
 
-    <!-- create modals for each recipe -->
-    <div id="recipeModal{{i}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          {{recipeTitle}}
+<!-- create modals for each recipe -->
+<div id="recipeModal{{i}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content container">
+            <div class="row">
+
+                <!-- Left column of modal -->
+                <div class="col-md-6 p-0">
+                    <img src="{{recipeImage}}" class="modalImg">
+                    <div class="m-4">
+                        <h2>{{recipeTitle}}</h2>
+                        <h5>Ingredients</h5>
+                        <ul class="ingredientsList">
+                            {{#each ingredientLines}}
+                                <li>{{this}}</li>
+                            {{/each}}  
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Right column of modal -->
+                <div class="col-md-6 p-0">
+                    <div class="m-4">
+                        <h5>Directions</h5>
+                        <ol class="directions">
+                            {{#each instructions}}
+                                <li>{{this}}</li>
+                            {{/each}}  
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            
+            {{!-- <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4">.col-md-4</div>
+                    <div class="col-md-4 ml-auto">.col-md-4 .ml-auto</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 ml-auto">.col-md-3 .ml-auto</div>
+                    <div class="col-md-2 ml-auto">.col-md-2 .ml-auto</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 ml-auto">.col-md-6 .ml-auto</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-9">
+                        Level 1: .col-sm-9
+                        <div class="row">
+                            <div class="col-8 col-sm-6">
+                                Level 2: .col-8 .col-sm-6
+                            </div>
+                            <div class="col-4 col-sm-6">
+                                Level 2: .col-4 .col-sm-6
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> --}}
         </div>
-      </div>
     </div>
+</div>
 
 {{/each}}
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>
-
-
