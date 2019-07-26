@@ -1,13 +1,18 @@
+/* main page */
+.mainTitle{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    color: red;
+  }
+
 /* LOG IN PAGE  */
-.bodyClassLogin {
-    background-image: url(/images/yellow.jpeg);
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-attachment: fixed; 
-    height:100%;
-    width:100%;
-    margin:0;
-    /* display:flex; */
+form {
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
 
   #exampleInputPassword1{
@@ -19,9 +24,10 @@
       width: 16px;
       height: 16px;
       cursor: pointer; 
+      color: red;
   }
 #home{
-    background-image: url(/public/images/yellow.jpeg);
+    /* background-image: url(/public/images/yellow.jpeg); */
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-attachment: fixed; 
@@ -32,14 +38,14 @@
 }
 #recipeCards{
     margin: 25px 25px 25px 25px;
-    border-style: solic;
+    border-style: solid;
     border-color: red;
     padding: 25, 25, 25, 25;
 }
 
-.recipeCard{
+/* .recipeCard{
     background-color:red;
-}
+} */
 /* GROCERY PAGE */
 #itemsToBuyTitle{
     text-align: center;

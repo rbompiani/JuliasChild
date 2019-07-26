@@ -25,19 +25,16 @@ app.set("view engine", "handlebars");
 
 //route to index//
 app.get('/', (req, res) => {
-
     res.render('signIn', { title: "Welcome to Julias Child!" });
 });
 //route to 404//
 app.get('/404', (req, res) => {
     res.render('404', { title: "ERROR 404" });
 });
-//route to index//
-app.get('/example', (req, res) => {
-    res.render('example', { title: "Example Title" });
-});
+
 //route to index//
 app.get('/index', (req, res) => {
+   
     // ** backend person- replace this info with the DB info // -sam
     var recipes = [
         {
@@ -63,6 +60,7 @@ app.get('/index', (req, res) => {
     ]
     db.Recipe.findAll().then(function (dataFromDB) {
         res.render('index', {
+            title: "Your Recipe Box",
             data: dataFromDB
         });
     });
