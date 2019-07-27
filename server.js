@@ -89,6 +89,33 @@ app.post('/signUp', function(req, res) {
 	}
 });
 
+//log in user//
+app.post('/logIn', function(req, res) {
+    // get user credentials from form
+	var userEmail = req.body.userEmail;
+    var userPassword = req.body.userPass;
+    console.log(userEmail,userPassword);
+    
+    //if both email and password are present, add an account to the database
+	if (userEmail && userPassword) {
+        db.Accounts
+            .findOne({where: {email: userEmail, password: userPassword}})
+            .then(user => {
+                if(user){
+                    req.session.loggedin = true;
+                    req.session.username = userEmail;
+                    res.redirect('/index');
+                } else {
+                    res.send('Wrong email and password!');
+                }
+                console.log(user);
+            })
+	} else {
+		res.send('Please enter Username and Password!');
+		res.end();
+	}
+});
+
 //route to index//
 app.get('/index', (req, res) => {
     console.log(req.session.loggedin);
@@ -113,6 +140,7 @@ app.get('/index', (req, res) => {
 //look into sorting function on the database stuff ie "Most liked recipes"
 
 db.sequelize.sync().then(function () {
+
 
     // db.Recipe.create(thingToSave).then(function (stuffFromSQL) {
     //     console.log(stuffFromSQL);
