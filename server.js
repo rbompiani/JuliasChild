@@ -34,9 +34,6 @@ app.use(session({
 	saveUninitialized: true
 }));
 
-
-
-
 /* ----------THESE SHOULD EVENTUALLY MIGRATE TO ROUTES FILES ---------*/
 //route to addrecipe//
 app.get('/addrecipe', (req, res) => {
