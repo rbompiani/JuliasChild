@@ -6,6 +6,12 @@
     width: 50%;
     color: red;
   }
+  .mainBody{
+    background-image: url(/images/cboard2.jpeg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-attachment: fixed;
+}
 
 /* LOG IN PAGE  */
 form {
@@ -20,24 +26,20 @@ form {
   }
  
   /* index.handlebars page */
-  #jumbotron-cont{
-      border-style: solid;
-      border-color: red;
+#yourRecipeBox{
+    text-align: center;
+      width:100%;
+      height:200px;
   }
-  #yourRecipeBox{
-      background-color: white;
-      color:red;
-    align-content: center;
 
-  }
   #recipeBoxPic{
     width: 240px;
     height: 200px;
   }
   .search-txt, .create-text{
-      /* top:50%;
-      left:50%; */
-      transform: translate(-50%, -50%);
+      top:50%;
+      left:50%;
+      /* transform: translate(-50%, -50%); */
       height: 40px;
       border-radius: 40px;
       padding: 10px;
@@ -50,6 +52,8 @@ height: 40px;
 display: flex;
 justify-content: center;
 align-items: center;
+padding: 20px 20px 20px 20px;
+margin: 20px 20px 20px 20px;
 
 }
   #heartImage{
