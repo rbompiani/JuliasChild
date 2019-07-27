@@ -28,15 +28,18 @@ form {
       margin-bottom: 20px;
   }
 
-
-
+#userEmail, #exampleInputPassword1{
+    font-size: 30px;
+}
+#signUpID{
+    font-size: 70px;
+}
                                                     /* /index*/
 #yourRecipeBox{
     text-align: center;
       width:100%;
       height:100px;
-      padding: 20px 20px 20px 20px;
-    margin: 20px 20px 20px 20px;
+    font-size: 100px;
   }
 
   #recipeBoxPic{
@@ -53,7 +56,7 @@ form {
       border-radius: 40px;
       padding: 10px;
     margin: 20px 20px 20px 20px;
-
+    font-size: 30px;
   }
 
 .fas{
@@ -63,8 +66,6 @@ height: 40px;
 display: flex;
 justify-content: center;
 align-items: center;
-/* padding: 20px 20px 20px 20px;
-margin: 20px 20px 20px 20px; */
 
 }
   #heartImage{
@@ -79,10 +80,14 @@ margin: 20px 20px 20px 20px; */
     border-style: solid;
     border-color: red;
     float: right;
+   
 }
+/* #cardIDtoMatch{
+    font-size: 30px;
+} */
 
 
-/* GROCERY PAGE */
+                                                    /* GROCERY PAGE */
 #itemsToBuyTitle{
     text-align: center;
     height:100%;
