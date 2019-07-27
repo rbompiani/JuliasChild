@@ -7,7 +7,7 @@
                                              {{!-- ingredients --}}
   <div class="form-group">
     <label for="addRecipeIngredients">Ingredients</label>
-    <select class="form-control" id="addRecipeIngredientsID">
+    <select class="form-control" id="addRecipeMeasurement">
       <option>1/8</option>
       <option>1/4</option>
       <option>1/2</option>
@@ -30,9 +30,7 @@
     
   </div>
   </div>
-
-
-
+<textarea class="form-control" id="lineForAddedIngredient" rows="3"></textarea>
 
                                             {{!-- Directions --}}
   <div class="form-group">
@@ -42,4 +40,16 @@
    <input class="btn btn-primary" id="submitButtonAddRecipeFinal" type="submit" value="Submit This Recipe To Your Box!">
 </form>
 
-\
+<script>
+ $("#submitButtonAddRecipe").on("click", function (event) {   // this is linking the clicked buttons to the GIF API, then clears//
+                event.preventDefault();
+                console.log("buttons clicked is working");
+                var addedIngredient= $("#ingredientInputBox").val();
+                var addedSizeIngredient=$("#addRecipeIngredientsID").val();
+                var addRecipeMeasurement=$("#addRecipeMeasurement").val();
+                console.log("addedsize is working : " + addedSizeIngredient);
+
+                console.log("addedIngredient is working : " + addedIngredient);
+                $("#lineForAddedIngredient").append(addRecipeMeasurement + " "+ addedSizeIngredient + " " +  addedIngredient  + "," + " ");
+ });
+</script>
