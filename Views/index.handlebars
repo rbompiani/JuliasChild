@@ -1,3 +1,6 @@
+
+<script>console.log({{data}});</script>
+
 <!--Jumbotron w/ title-->
 <div class="container-fluid">
     <h1 class="display-4" id="yourRecipeBox">Your Recipe Box</h1>
@@ -22,9 +25,8 @@
 </div>
 <br></br>
 
-
 <!-- CARD -->
-{{#each data as |item i|}}
+{{#each data}}
 <div class="container" id="cardIDtoMatch">
     <div class="col-sm recipeCard" id="{{i}}" data-toggle="modal" data-target="#recipeModal{{i}}">
         <div class="card" id="recipeCards" style="width: 12rem;">
@@ -41,7 +43,10 @@
                 <img id="heartImage" src="/images/heart.png">
             </div>
         </div>
+<<<<<<< HEAD
         
+=======
+>>>>>>> 45a25152dfe99365ed9951ec5daae5c8e93c3cf1
     </div>
 </div>
 
