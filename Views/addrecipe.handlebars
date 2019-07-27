@@ -2,11 +2,21 @@
                                              {{!-- add title --}}
   <div class="form-group">
     <label for="addRecipeTitle">Recipe Title:</label>
-    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="'Nachos'">
+    <input type="input" class="form-control" id="exampleFormControlInput1" placeholder="'ie: Nachos'">
   </div>
                                              {{!-- ingredients --}}
   <div class="form-group">
     <label for="addRecipeIngredients">Ingredients</label>
+    <select class="form-control" id="addRecipeIngredientsID">
+      <option>1/8</option>
+      <option>1/4</option>
+      <option>1/2</option>
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+    </select>
     <select class="form-control" id="addRecipeIngredientsID">
       <option>Teaspoon</option>
       <option>Tablespoon</option>
@@ -15,8 +25,9 @@
       <option>Dash</option>
     </select>
 <div class="form-group">
-    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="'butter'">
+    <input type="input" class="form-control" id="ingredientInputBox" placeholder="'ie: butter'">
      <input class="btn btn-primary" id="submitButtonAddRecipe" type="submit" value="Submit">
+    
   </div>
   </div>
 
@@ -30,3 +41,5 @@
   </div>
    <input class="btn btn-primary" id="submitButtonAddRecipeFinal" type="submit" value="Submit This Recipe To Your Box!">
 </form>
+
+\
