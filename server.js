@@ -59,8 +59,11 @@ app.get('/auth', (req, res) => {
 
 //create new user with signUp//
 app.post('/signUp', function(req, res) {
+    // get user credentials from form
 	var userEmail = req.body.userEmail;
-	var userPassword = req.body.userPass;
+    var userPassword = req.body.userPass;
+    
+    //if both email and password are present, add an account to the database
 	if (userEmail && userPassword) {
         db.Accounts
             .findOrCreate({where: {email: userEmail}, defaults: {password: userPassword}})
@@ -85,36 +88,18 @@ app.post('/signUp', function(req, res) {
 
 //route to index//
 app.get('/index', (req, res) => {
-   
-    // ** backend person- replace this info with the DB info // -sam
-    var recipes = [
-        {
-            title: "Burrito Bowl",
-            recipeImage: "https://www.mercurynews.com/wp-content/uploads/2017/07/blog-chipotle-parks-burrito.jpg",
-            recipeTitle: "Burrito Bowl",
-            recipeDesc: "A healthy option for food",
-            calories: "400",
-            nutrition: "Vegan, gluten free, yada",
-            ingredientLines: ["1 chicken, about 3.5 to 4 pounds", "1 lemon", "1 blood orange", "1 tangerine or clementine", "Kosher salt", "1/2 cup chicken broth"],
-            instructions: ["step1", "step2", "step3", "step4"]
-        },
-        {
-            title: "Salmon",
-            recipeImage: "https://www.inspiredtaste.net/wp-content/uploads/2018/09/Easy-Oven-Baked-Salmon-Recipe-2-1200.jpg",
-            recipeTitle: "Salmon",
-            recipeDesc: "A healthy option for food",
-            calories: "200",
-            nutrition: "Vegan, gluten free, yada",
-            ingredientLines: ["1 chicken, about 3.5 to 4 pounds", "1 lemon", "1 blood orange", "1 tangerine or clementine", "Kosher salt", "1/2 cup chicken broth"],
-            instructions: ["step1", "step2", "step3", "step4"]
-        }
-    ]
-    db.Recipe.findAll().then(function (dataFromDB) {
-        res.render('index', {
-            // title: "Your Recipe Box",
-            data: dataFromDB
-        });
-    });
+    console.log(req.session.loggedin);
+    if(!req.session.loggedin){
+        res.redirect('/');
+    } else {
+
+        db.Recipe.findAll().then(function (dataFromDB) {
+            res.render('index', {
+                // title: "Your Recipe Box",
+                data: dataFromDB
+            });
+        });        
+    }
 
 });
                         // **HEY GURL HEY** DB stuff?  //
