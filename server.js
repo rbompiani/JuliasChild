@@ -94,6 +94,8 @@ app.get('/index', (req, res) => {
     } else {
 
         db.Recipe.findAll().then(function (dataFromDB) {
+            console.log(dataFromDB);
+            //res.json(dataFromDB);
             res.render('index', {
                 // title: "Your Recipe Box",
                 data: dataFromDB
@@ -109,20 +111,23 @@ app.get('/index', (req, res) => {
 
 db.sequelize.sync().then(function () {
 
-    var thingToSave = {
-        title: "Salmon test 2",
-        recipeImage: "https://www.inspiredtaste.net/wp-content/uploads/2018/09/Easy-Oven-Baked-Salmon-Recipe-2-1200.jpg",
-        recipeTitle: "Salmon 3",
-        recipeDesc: "$$$",
-        calories: "200",
-        nutrition: "Vegan, gluten free, yada",
-        ingredientLines: '"1 chicken, about 3.5 to 4 pounds", "1 lemon", "1 blood orange", "1 tangerine or clementine", "Kosher salt", "1/2 cup chicken broth"',
-        instructions: '"step1", "step2", "step3", "step4"'
-    }
+    // db.Recipe.create(thingToSave).then(function (stuffFromSQL) {
+    //     console.log(stuffFromSQL);
+    // });
 
-    db.Recipe.create(thingToSave).then(function (stuffFromSQL) {
-        console.log(stuffFromSQL);
-    });
+    // var thingToSave = {
+    //     title: "Salmon test 2",
+    //     recipeImage: "https://www.inspiredtaste.net/wp-content/uploads/2018/09/Easy-Oven-Baked-Salmon-Recipe-2-1200.jpg",
+    //     recipeTitle: "Salmon 3",
+    //     recipeDesc: "$$$",
+    //     calories: "200",
+    //     nutrition: "Vegan, gluten free, yada",
+    //     ingredientLines: '"1 chicken, about 3.5 to 4 pounds", "1 lemon", "1 blood orange", "1 tangerine or clementine", "Kosher salt", "1/2 cup chicken broth"',
+    //     instructions: '"step1", "step2", "step3", "step4"'
+    // }
+    // db.Recipe.create(thingToSave).then(function (stuffFromSQL) {
+    //     console.log(stuffFromSQL);
+    // });
 
     app.listen(PORT, function () {
         console.log("App listening on: http://localhost: " + PORT);
