@@ -1,7 +1,9 @@
                                                     /* main page HANDLEBARS PAGE*/
 .mainTitle{
+    font-size: 110px;
     text-align: center;
     font-family: 'Tangerine', cursive;
+    padding-top: 90px;
   }
 
   .mainBody{
@@ -25,9 +27,6 @@ form {
   #exampleInputPassword1{
       margin-bottom: 20px;
   }
- 
-
-
 
 
 
