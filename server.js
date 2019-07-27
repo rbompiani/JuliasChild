@@ -44,6 +44,7 @@ app.get('/addrecipe', (req, res) => {
 });
 //route to index//
 app.get('/', (req, res) => {
+
     res.render('signIn', { title: "Welcome to Julias Child!" });
 });
 
@@ -53,28 +54,33 @@ app.get('/404', (req, res) => {
 });
 
 //change form to login//
-app.get('/login', (req, res) => {
+app.get('/auth', (req, res) => {
     res.render('signIn', { title: "Welcome to Julias Child!", login:"true" });
 });
 
 //create new user with signUp//
 app.post('/signUp', function(req, res) {
-	var useremail = req.body.userEmail;
-	var password = req.body.userPass;
-	if (useremail && password) {
-		connection.query('INSERT INTO accounts FROM accounts WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
-			if (results.length > 0) {
-				request.session.loggedin = true;
-				request.session.username = username;
-				response.redirect('/home');
-			} else {
-				response.send('Incorrect Username and/or Password!');
-			}			
-			response.end();
-		});
+	var userEmail = req.body.userEmail;
+	var userPassword = req.body.userPass;
+	if (userEmail && userPassword) {
+        db.Accounts
+            .findOrCreate({where: {email: userEmail}, defaults: {password: userPassword}})
+            .then(([user, created]) => {
+                console.log(user.get({
+                plain: true
+            }))
+                if(created){
+                    req.session.loggedin = true;
+                    req.session.username = userEmail;
+                    res.redirect('/index');
+                } else {
+                    res.send('This account already exists!');
+                }
+                console.log(created);
+            })
 	} else {
-		response.send('Please enter Username and Password!');
-		response.end();
+		res.send('Please enter Username and Password!');
+		res.end();
 	}
 });
 
@@ -139,4 +145,7 @@ db.sequelize.sync().then(function () {
 
     });
 });
+
+
 //make it listen to express server//
+

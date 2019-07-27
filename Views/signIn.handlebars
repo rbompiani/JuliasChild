@@ -1,21 +1,21 @@
 {{#if login}}
-    <form action="/logIn/" method="GET" class="userAuth">
-        <h1 class="logIn" id="logInID">Log In</h1>
+    <form action="/logIn" method="GET" class="userAuth">
+        <h1 class="logIn">Log In</h1>
 {{else}}
-    <form action="/signUp/" method="POST" id="signUpID" class="userAuth">
-        <h1 class="signUp" id="signUpID">Sign Up</h1>
+    <form action="/signUp" method="POST" class="userAuth">
+        <h1 class="signUp">Sign Up</h1>
 {{/if}}
 
         <div class="form-group">
 
-            <input type="email" class="form-control" id="userEmail" aria-describedby="emailHelp"
+            <input type="email" class="form-control" name="userEmail" aria-describedby="emailHelp"
                 placeholder="Enter email">
 
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            <input type="password" class="form-control" name="userPass" placeholder="Password">
             <input class="btn btn-primary" id="submitLoginButton" type="submit" value="Submit">
 
             {{#unless login}}
-                <a class="btn btn-primary" id="signUpButton" href="/login" role="button">Log In</a>
+                <a class="btn btn-primary" id="signUpButton" href="/auth" role="button">Log In</a>
             {{/unless}}
 
         </div>
