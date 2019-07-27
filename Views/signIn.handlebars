@@ -1,8 +1,8 @@
 {{#if login}}
-    <form action="/logIn/" method="GET">
+    <form action="/logIn/" method="GET" class="userAuth">
         <h1 class="logIn" id="logInID">Log In</h1>
 {{else}}
-    <form action="/signUp/" method="POST">
+    <form action="/signUp/" method="POST" class="userAuth">
         <h1>Sign Up</h1>
 {{/if}}
 
@@ -15,7 +15,7 @@
             <input class="btn btn-primary" id="submitLoginButton" type="submit" value="Submit">
 
             {{#unless login}}
-                <a class="btn btn-primary" id="signUpButton" href="/login/" role="button">Log In</a>
+                <a class="btn btn-primary" id="signUpButton" href="/login" role="button">Log In</a>
             {{/unless}}
 
         </div>

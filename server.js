@@ -33,8 +33,13 @@ app.get('/404', (req, res) => {
     res.render('404', { title: "ERROR 404" });
 });
 
-//route to index//
-app.get('/login', (req, res) => {
+//change form to login//
+app.get('/:login', (req, res) => {
+    res.render('signIn', { title: "Welcome to Julias Child!", login:"true" });
+});
+
+//route to login//
+app.get('/login/', (req, res) => {
     res.render('signIn', { title: "Welcome to Julias Child!", login:"true" });
 });
 
