@@ -1,0 +1,28 @@
+<form>
+                                             {{!-- add title --}}
+  <div class="form-group">
+    <label for="addRecipeTitle">Recipe Title:</label>
+    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="'Nachos'">
+  </div>
+                                             {{!-- ingredients --}}
+  <div class="form-group">
+    <label for="addRecipeIngredients">Ingredients</label>
+    <select class="form-control" id="addRecipeIngredientsID">
+      <option>Teaspoon</option>
+      <option>Tablespoon</option>
+      <option>Cup</option>
+      <option>Pinch</option>
+      <option>Dash</option>
+    </select>
+<div class="form-group">
+    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="'butter'">
+     <input class="btn btn-primary" id="submitButtonAddRecipe" type="submit" value="Submit">
+  </div>
+  </div>
+                                            {{!-- Directions --}}
+  <div class="form-group">
+    <label for="addRecipeDirections">Directions</label>
+    <textarea class="form-control" id="addRecipeDirections" rows="3"></textarea>
+  </div>
+   <input class="btn btn-primary" id="submitButtonAddRecipeFinal" type="submit" value="Submit This Recipe To Your Box!">
+</form>

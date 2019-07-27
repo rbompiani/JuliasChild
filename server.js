@@ -42,6 +42,8 @@ app.use(session({
 app.get('/addrecipe', (req, res) => {
     res.render('addrecipe', { title: "Add A Recipe" });
 });
+
+
 //route to index//
 app.get('/', (req, res) => {
 
