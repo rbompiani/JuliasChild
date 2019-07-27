@@ -42,6 +42,7 @@ app.get('/addrecipe', (req, res) => {
 
 
 //route to index//
+require("./routes/apiRoutes")(app);
 app.get('/', (req, res) => {
     if (req.session.loggedin) {
 		res.redirect('/index');
@@ -142,6 +143,11 @@ app.get('/index', (req, res) => {
 db.sequelize.sync().then(function () {
 
 
+<<<<<<< HEAD
+    db.Recipe.create(thingToSave).then(function (stuffFromSQL) {
+      //  console.log(stuffFromSQL);
+    });
+=======
     // db.Recipe.create(thingToSave).then(function (stuffFromSQL) {
     //     console.log(stuffFromSQL);
     // });
@@ -159,6 +165,7 @@ db.sequelize.sync().then(function () {
     // db.Recipe.create(thingToSave).then(function (stuffFromSQL) {
     //     console.log(stuffFromSQL);
     // });
+>>>>>>> master
 
     app.listen(PORT, function () {
         console.log("App listening on: http://localhost: " + PORT);
