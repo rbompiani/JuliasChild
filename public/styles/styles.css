@@ -1,13 +1,18 @@
+/* main page */
+.mainTitle{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    color: red;
+  }
+
 /* LOG IN PAGE  */
-.bodyClassLogin {
-    background-image: url(/images/yellow.jpeg);
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-attachment: fixed; 
-    height:100%;
-    width:100%;
-    margin:0;
-    /* display:flex; */
+form {
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
 
   #exampleInputPassword1{
@@ -15,31 +20,66 @@
   }
  
   /* index.handlebars page */
+  #jumbotron-cont{
+      border-style: solid;
+      border-color: red;
+  }
+  #yourRecipeBox{
+      background-color: white;
+      color:red;
+    align-content: center;
+
+  }
+  #recipeBoxPic{
+    width: 240px;
+    height: 200px;
+  }
+  .search-txt, .create-text{
+      /* top:50%;
+      left:50%; */
+      transform: translate(-50%, -50%);
+      height: 40px;
+      border-radius: 40px;
+      padding: 10px;
+  }
+.fas{
+color: red;
+float: right;
+width: 40px;
+height: 40px;
+display: flex;
+justify-content: center;
+align-items: center;
+
+}
   #heartImage{
       width: 16px;
       height: 16px;
       cursor: pointer; 
+      color: red;
   }
-#home{
-    background-image: url(/public/images/yellow.jpeg);
-    background-repeat: no-repeat;
+/* #home{
+    /* background-image: url(/public/images/yellow.jpeg); */
+    /* background-repeat: no-repeat;
     background-size: 100% 100%;
-    background-attachment: fixed; 
-    height:100%;
+    background-attachment: fixed;  */
+    /* height:100%;
     width:100%;
     margin:0;
-    display:flex;
-}
+    display:flex; */
+/* } */ 
 #recipeCards{
     margin: 25px 25px 25px 25px;
-    border-style: solic;
+    border-style: solid;
     border-color: red;
     padding: 25, 25, 25, 25;
+
+    /* float: left; */
 }
 
-.recipeCard{
+/* .recipeCard{
     background-color:red;
-}
+} */
 /* GROCERY PAGE */
 #itemsToBuyTitle{
     text-align: center;
