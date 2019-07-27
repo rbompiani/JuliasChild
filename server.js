@@ -38,6 +38,10 @@ app.use(session({
 
 
 /* ----------THESE SHOULD EVENTUALLY MIGRATE TO ROUTES FILES ---------*/
+//route to addrecipe//
+app.get('/addrecipe', (req, res) => {
+    res.render('addrecipe', { title: "Add A Recipe" });
+});
 //route to index//
 app.get('/', (req, res) => {
     res.render('signIn', { title: "Welcome to Julias Child!" });
