@@ -1,5 +1,7 @@
-/* main page HANDLEBARS PAGE*/
+                                                    /* main page HANDLEBARS PAGE*/
 .mainTitle{
+    text-align: center;
+    font-family: 'Tangerine', cursive;
   }
 
   .mainBody{
@@ -8,9 +10,11 @@
     background-size: 100% 100%;
     background-attachment: fixed;
 }
+#mainBodyID{
+    font-family: 'Tangerine', cursive;
+}
 
-
-/* LOG IN PAGE  */
+                                                    /* /login  */
 form {
     display: block;
   margin-left: auto;
@@ -24,7 +28,10 @@ form {
  
 
 
-  /* index.handlebars page */
+
+
+
+                                                    /* /index*/
 #yourRecipeBox{
     text-align: center;
       width:100%;
