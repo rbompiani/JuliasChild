@@ -4,7 +4,7 @@ CREATE DATABASE recipebox_db;
 
 USE recipebox_db;
 
-CREATE TABLE `recipe` (
+CREATE TABLE IF NOT EXISTS `recipe` (
   `recipeID` Int( 11 ) AUTO_INCREMENT NOT NULL,
   `recipeImage` VARCHAR( 160 ) NOT NULL,
   `recipeTitle` VARCHAR( 255) NOT NULL,
@@ -17,7 +17,7 @@ CREATE TABLE `recipe` (
   PRIMARY KEY ( `recipeID` ) 
 );
 
-CREATE TABLE `ingredients` (
+CREATE TABLE IF NOT EXISTS `ingredients` (
   `ingredientID` INT( 11 ) AUTO_INCREMENT NOT NULL,
   `ingredientLines` VARCHAR( 80 ) NOT NULL,
   `recipeID` INT,
@@ -26,3 +26,14 @@ CREATE TABLE `ingredients` (
   FOREIGN KEY ( `recipeID` ) REFERENCES `recipe`(`recipeID`)
 );
 
+-- Creating users table --
+CREATE TABLE IF NOT EXISTS `accounts` (
+  `userID` Int( 11 ) AUTO_INCREMENT NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+
+  PRIMARY KEY (`userID`)
+
+); 
+
+INSERT INTO `accounts` (`email`, `password`) VALUES ('test@test.com', 'test');

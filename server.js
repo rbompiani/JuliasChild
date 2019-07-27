@@ -1,3 +1,4 @@
+/* ----------NPM PACKAGE DEPENDENCIES ---------*/
 //require express package//
 var express = require('express');
 
@@ -9,6 +10,7 @@ var exphbs = require("express-handlebars");
 
 var path = require("path");
 
+/* ----------INSTANTIATE MODULES ---------*/
 //run express//
 var app = express();
 var PORT = process.env.PORT || 3000;
@@ -23,13 +25,51 @@ app.use(bodyParser.json());
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
+//use session//
+app.use(session({
+	secret: 'secret',
+	resave: true,
+	saveUninitialized: true
+}));
+
+
+
+
+/* ----------THESE SHOULD EVENTUALLY MIGRATE TO ROUTES FILES ---------*/
 //route to index//
 app.get('/', (req, res) => {
     res.render('signIn', { title: "Welcome to Julias Child!" });
 });
+
 //route to 404//
 app.get('/404', (req, res) => {
     res.render('404', { title: "ERROR 404" });
+});
+
+//change form to login//
+app.get('/:login', (req, res) => {
+    res.render('signIn', { title: "Welcome to Julias Child!", login:"true" });
+});
+
+//create new user with signUp//
+app.post('/signUp', function(req, res) {
+	var useremail = req.body.userEmail;
+	var password = req.body.userPass;
+	if (useremail && password) {
+		connection.query('INSERT INTO accounts FROM accounts WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
+			if (results.length > 0) {
+				request.session.loggedin = true;
+				request.session.username = username;
+				response.redirect('/home');
+			} else {
+				response.send('Incorrect Username and/or Password!');
+			}			
+			response.end();
+		});
+	} else {
+		response.send('Please enter Username and Password!');
+		response.end();
+	}
 });
 
 //route to index//

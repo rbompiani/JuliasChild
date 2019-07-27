@@ -1,8 +1,8 @@
 {
     "development": {
       "username": "root",
-      "password": "Sgr31087!",
-      "database": "example_db",
+      "password": "password",
+      "database": "recipebox_db",
       "host": "127.0.0.1",
       "dialect": "mysql"
     },
