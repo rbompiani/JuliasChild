@@ -60,7 +60,7 @@ app.get('/index', (req, res) => {
     ]
     db.Recipe.findAll().then(function (dataFromDB) {
         res.render('index', {
-            title: "Your Recipe Box",
+            // title: "Your Recipe Box",
             data: dataFromDB
         });
     });
