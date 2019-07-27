@@ -39,6 +39,7 @@ app.use(session({
 
 /* ----------THESE SHOULD EVENTUALLY MIGRATE TO ROUTES FILES ---------*/
 //route to index//
+require("./routes/apiRoutes")(app);
 app.get('/', (req, res) => {
     if (req.session.loggedin) {
 		res.redirect('/index');
@@ -136,7 +137,7 @@ db.sequelize.sync().then(function () {
     }
 
     db.Recipe.create(thingToSave).then(function (stuffFromSQL) {
-        console.log(stuffFromSQL);
+      //  console.log(stuffFromSQL);
     });
 
     app.listen(PORT, function () {
