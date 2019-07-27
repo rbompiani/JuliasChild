@@ -1,17 +1,14 @@
-/* main page */
+/* main page HANDLEBARS PAGE*/
 .mainTitle{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-    color: red;
   }
+
   .mainBody{
     background-image: url(/images/cboard2.jpeg);
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-attachment: fixed;
 }
+
 
 /* LOG IN PAGE  */
 form {
@@ -25,35 +22,43 @@ form {
       margin-bottom: 20px;
   }
  
+
+
   /* index.handlebars page */
 #yourRecipeBox{
     text-align: center;
       width:100%;
-      height:200px;
+      height:100px;
+      padding: 20px 20px 20px 20px;
+    margin: 20px 20px 20px 20px;
   }
 
   #recipeBoxPic{
     width: 240px;
     height: 200px;
   }
+  #searchContainer{
+      align-items: center;
+      margin-left: 290px;
+  }
   .search-txt, .create-text{
-      top:50%;
-      left:50%;
-      /* transform: translate(-50%, -50%); */
+      text-align: center;
       height: 40px;
       border-radius: 40px;
       padding: 10px;
+    margin: 20px 20px 20px 20px;
+
   }
+
 .fas{
 color: red;
-float: right;
 width: 40px;
 height: 40px;
 display: flex;
 justify-content: center;
 align-items: center;
-padding: 20px 20px 20px 20px;
-margin: 20px 20px 20px 20px;
+/* padding: 20px 20px 20px 20px;
+margin: 20px 20px 20px 20px; */
 
 }
   #heartImage{
@@ -62,28 +67,15 @@ margin: 20px 20px 20px 20px;
       cursor: pointer; 
       color: red;
   }
-/* #home{
-    /* background-image: url(/public/images/yellow.jpeg); */
-    /* background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-attachment: fixed;  */
-    /* height:100%;
-    width:100%;
-    margin:0;
-    display:flex; */
-/* } */ 
+
 #recipeCards{
     margin: 25px 25px 25px 25px;
     border-style: solid;
     border-color: red;
-    padding: 25, 25, 25, 25;
-
-    /* float: left; */
+    float: right;
 }
 
-/* .recipeCard{
-    background-color:red;
-} */
+
 /* GROCERY PAGE */
 #itemsToBuyTitle{
     text-align: center;
