@@ -58,8 +58,7 @@ module.exports = function(app) {
                    });
                   
               });
-      
-              res.json(foo);
+              res.render("index", {data: foo})
           });
         });
     }
