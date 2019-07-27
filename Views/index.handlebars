@@ -1,3 +1,6 @@
+
+<script>console.log({{data}});</script>
+
 <!--Jumbotron w/ title-->
 <div class="container-fluid">
     <h1 class="display-4" id="yourRecipeBox">Your Recipe Box</h1>
@@ -22,42 +25,11 @@
 </div>
 <br></br>
 
-
 <!-- CARD -->
-{{#each data as |item i|}}
+{{#each data}}
 <div class="container" id="cardIDtoMatch">
     <div class="col-sm recipeCard" id="{{i}}" data-toggle="modal" data-target="#recipeModal{{i}}">
         <div class="card" id="recipeCards" style="width: 12rem;">
-            <img src={{recipeImage}} class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">{{recipeTitle}}</h5>
-                <p class="card-text">{{recipeDesc}}</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">{{calories}}</li>
-                <li class="list-group-item">{{nutrition}}</li>
-            </ul>
-            <div class="card-body">
-                <img id="heartImage" src="/images/heart.png">
-            </div>
-        </div>
-        {{!-- card2 --}}
-         <div class="card" id="recipeCards" style="width: 12rem;">
-            <img src={{recipeImage}} class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">{{recipeTitle}}</h5>
-                <p class="card-text">{{recipeDesc}}</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">{{calories}}</li>
-                <li class="list-group-item">{{nutrition}}</li>
-            </ul>
-            <div class="card-body">
-                <img id="heartImage" src="/images/heart.png">
-            </div>
-        </div>
-        {{!-- card3 --}}
-         <div class="card" id="recipeCards" style="width: 12rem;">
             <img src={{recipeImage}} class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">{{recipeTitle}}</h5>
