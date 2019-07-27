@@ -1,5 +1,9 @@
-/* main page HANDLEBARS PAGE*/
+                                                    /* main page HANDLEBARS PAGE*/
 .mainTitle{
+    font-size: 110px;
+    text-align: center;
+    font-family: 'Tangerine', cursive;
+    padding-top: 90px;
   }
 
   .mainBody{
@@ -8,9 +12,11 @@
     background-size: 100% 100%;
     background-attachment: fixed;
 }
+#mainBodyID{
+    font-family: 'Tangerine', cursive;
+}
 
-
-/* LOG IN PAGE  */
+                                                    /* /login  */
 form {
     display: block;
   margin-left: auto;
@@ -21,10 +27,10 @@ form {
   #exampleInputPassword1{
       margin-bottom: 20px;
   }
- 
 
 
-  /* index.handlebars page */
+
+                                                    /* /index*/
 #yourRecipeBox{
     text-align: center;
       width:100%;
