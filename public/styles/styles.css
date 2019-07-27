@@ -24,14 +24,13 @@ form {
   width: 50%;
 }
 
-  #exampleInputPassword1{
-      margin-bottom: 20px;
-  }
-
+#submitLoginButton{
+  margin: 20px;
+}
 #userEmail, #exampleInputPassword1{
     font-size: 30px;
 }
-#signUpID{
+#signUpID, #logInID{
     font-size: 70px;
 }
                                                     /* /index*/
@@ -68,6 +67,10 @@ justify-content: center;
 align-items: center;
 
 }
+.far{
+  color: red;
+  font-weight: bold;
+}
   #heartImage{
       width: 16px;
       height: 16px;
@@ -87,7 +90,7 @@ align-items: center;
 } */
 
 
-                                                    /* GROCERY PAGE */
+                                                    /* GROCERY PAGE -*/
 #itemsToBuyTitle{
     text-align: center;
     height:100%;

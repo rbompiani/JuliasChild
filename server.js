@@ -34,10 +34,13 @@ app.use(session({
 	saveUninitialized: true
 }));
 
-
-
-
 /* ----------THESE SHOULD EVENTUALLY MIGRATE TO ROUTES FILES ---------*/
+//route to addrecipe//
+app.get('/addrecipe', (req, res) => {
+    res.render('addrecipe', { title: "Add A Recipe" });
+});
+
+
 //route to index//
 require("./routes/apiRoutes")(app);
 app.get('/', (req, res) => {
@@ -60,8 +63,11 @@ app.get('/auth', (req, res) => {
 
 //create new user with signUp//
 app.post('/signUp', function(req, res) {
+    // get user credentials from form
 	var userEmail = req.body.userEmail;
-	var userPassword = req.body.userPass;
+    var userPassword = req.body.userPass;
+    
+    //if both email and password are present, add an account to the database
 	if (userEmail && userPassword) {
         db.Accounts
             .findOrCreate({where: {email: userEmail}, defaults: {password: userPassword}})
@@ -84,38 +90,49 @@ app.post('/signUp', function(req, res) {
 	}
 });
 
+//log in user//
+app.post('/logIn', function(req, res) {
+    // get user credentials from form
+	var userEmail = req.body.userEmail;
+    var userPassword = req.body.userPass;
+    console.log(userEmail,userPassword);
+    
+    //if both email and password are present, add an account to the database
+	if (userEmail && userPassword) {
+        db.Accounts
+            .findOne({where: {email: userEmail, password: userPassword}})
+            .then(user => {
+                if(user){
+                    req.session.loggedin = true;
+                    req.session.username = userEmail;
+                    res.redirect('/index');
+                } else {
+                    res.send('Wrong email and password!');
+                }
+                console.log(user);
+            })
+	} else {
+		res.send('Please enter Username and Password!');
+		res.end();
+	}
+});
+
 //route to index//
 app.get('/index', (req, res) => {
-   
-    // ** backend person- replace this info with the DB info // -sam
-    var recipes = [
-        {
-            title: "Burrito Bowl",
-            recipeImage: "https://www.mercurynews.com/wp-content/uploads/2017/07/blog-chipotle-parks-burrito.jpg",
-            recipeTitle: "Burrito Bowl",
-            recipeDesc: "A healthy option for food",
-            calories: "400",
-            nutrition: "Vegan, gluten free, yada",
-            ingredientLines: ["1 chicken, about 3.5 to 4 pounds", "1 lemon", "1 blood orange", "1 tangerine or clementine", "Kosher salt", "1/2 cup chicken broth"],
-            instructions: ["step1", "step2", "step3", "step4"]
-        },
-        {
-            title: "Salmon",
-            recipeImage: "https://www.inspiredtaste.net/wp-content/uploads/2018/09/Easy-Oven-Baked-Salmon-Recipe-2-1200.jpg",
-            recipeTitle: "Salmon",
-            recipeDesc: "A healthy option for food",
-            calories: "200",
-            nutrition: "Vegan, gluten free, yada",
-            ingredientLines: ["1 chicken, about 3.5 to 4 pounds", "1 lemon", "1 blood orange", "1 tangerine or clementine", "Kosher salt", "1/2 cup chicken broth"],
-            instructions: ["step1", "step2", "step3", "step4"]
-        }
-    ]
-    db.Recipe.findAll().then(function (dataFromDB) {
-        res.render('index', {
-            // title: "Your Recipe Box",
-            data: dataFromDB
-        });
-    });
+    console.log(req.session.loggedin);
+    if(!req.session.loggedin){
+        res.redirect('/');
+    } else {
+
+        db.Recipe.findAll().then(function (dataFromDB) {
+            console.log(dataFromDB);
+            //res.json(dataFromDB);
+            res.render('index', {
+                // title: "Your Recipe Box",
+                data: dataFromDB
+            });
+        });        
+    }
 
 });
                         // **HEY GURL HEY** DB stuff?  //
@@ -125,20 +142,30 @@ app.get('/index', (req, res) => {
 
 db.sequelize.sync().then(function () {
 
-    var thingToSave = {
-        title: "Salmon test 2",
-        recipeImage: "https://www.inspiredtaste.net/wp-content/uploads/2018/09/Easy-Oven-Baked-Salmon-Recipe-2-1200.jpg",
-        recipeTitle: "Salmon 3",
-        recipeDesc: "$$$",
-        calories: "200",
-        nutrition: "Vegan, gluten free, yada",
-        ingredientLines: '"1 chicken, about 3.5 to 4 pounds", "1 lemon", "1 blood orange", "1 tangerine or clementine", "Kosher salt", "1/2 cup chicken broth"',
-        instructions: '"step1", "step2", "step3", "step4"'
-    }
 
+<<<<<<< HEAD
     db.Recipe.create(thingToSave).then(function (stuffFromSQL) {
       //  console.log(stuffFromSQL);
     });
+=======
+    // db.Recipe.create(thingToSave).then(function (stuffFromSQL) {
+    //     console.log(stuffFromSQL);
+    // });
+
+    // var thingToSave = {
+    //     title: "Salmon test 2",
+    //     recipeImage: "https://www.inspiredtaste.net/wp-content/uploads/2018/09/Easy-Oven-Baked-Salmon-Recipe-2-1200.jpg",
+    //     recipeTitle: "Salmon 3",
+    //     recipeDesc: "$$$",
+    //     calories: "200",
+    //     nutrition: "Vegan, gluten free, yada",
+    //     ingredientLines: '"1 chicken, about 3.5 to 4 pounds", "1 lemon", "1 blood orange", "1 tangerine or clementine", "Kosher salt", "1/2 cup chicken broth"',
+    //     instructions: '"step1", "step2", "step3", "step4"'
+    // }
+    // db.Recipe.create(thingToSave).then(function (stuffFromSQL) {
+    //     console.log(stuffFromSQL);
+    // });
+>>>>>>> master
 
     app.listen(PORT, function () {
         console.log("App listening on: http://localhost: " + PORT);
