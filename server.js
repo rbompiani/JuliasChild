@@ -40,8 +40,11 @@ app.use(session({
 /* ----------THESE SHOULD EVENTUALLY MIGRATE TO ROUTES FILES ---------*/
 //route to index//
 app.get('/', (req, res) => {
-
-    res.render('signIn', { title: "Welcome to Julias Child!" });
+    if (req.session.loggedin) {
+		res.redirect('/index');
+	} else {
+        res.render('signIn', { title: "Welcome to Julias Child!" });
+	}
 });
 
 //route to 404//
