@@ -8,6 +8,8 @@ var bodyParser = require("body-parser");
 
 var exphbs = require("express-handlebars");
 
+var session = require('express-session');
+
 var path = require("path");
 
 /* ----------INSTANTIATE MODULES ---------*/
