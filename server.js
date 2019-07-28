@@ -48,35 +48,33 @@ app.post('/submit-recipe', (req, res) => {
     //var recipe = req.body.recipe;
     var recipeTitle = req.body.recipeTitle;
     var recipeDesc = req.body.recipeDesc;
-    var calories = req.body.calories;
-    var nutrition = req.body.nutrition;
     //var cookingTime = req.body.cookingTime;
     var instructions = req.body.instructions;
-    console.log(recipeTitle, recipeDesc, calories, nutrition, instructions);
-   if (recipeTitle && recipeDesc && calories && nutrition && instructions) {
+    console.log(recipeTitle, recipeDesc, instructions);
+   if (recipeTitle && recipeDesc && instructions) {
         db.Recipe
             .findOrCreate({
                 where:
                 {
                     recipeTitle: recipeTitle,
                     recipeDesc: recipeDesc,
-                    calories: calories,
-                    nutrition: nutrition,
                     instructions: instructions
                 }
             })
             .then(([recipe, created]) => {
-                console.log(recipe.get({ plain: true }))
-                if (created) {
-                    //req.session.loggedin = true;
-                    //req.session.addRecipeDirections = submitButtonAddRecipeFinal;
-                    res.redirect('/index', 302);
-                } else {
+                if (!created) {
                     res.send('You seem to be missing some information...');
                     res.end();
                 }
-                console.log(created);
+                var userEmail = req.session.username;
 
+                db.Accounts.findOne({ where: {email: userEmail} }).then(user => {
+                    db.RecipeBox.create({ userID: user.userID, recipeID: recipe.recipeID })
+                    .then((created)=>{
+                        res.redirect('/index', 302);
+                    })
+                });
+                
             });
     };
 })
@@ -123,7 +121,6 @@ app.post('/signUp', function(req, res) {
                 } else {
                     res.send('This account already exists!');
                 }
-                console.log(created);
             })
     } else {
         res.send('Please enter Username and Password!');
@@ -136,7 +133,6 @@ app.post('/logIn', function(req, res) {
     // get user credentials from form
 	var userEmail = req.body.userEmail;
     var userPassword = req.body.userPass;
-    console.log(userEmail,userPassword);
     
     //if both email and password are present, add an account to the database
 	if (userEmail && userPassword) {
@@ -150,7 +146,6 @@ app.post('/logIn', function(req, res) {
                 } else {
                     res.send('Wrong email and password!');
                 }
-                console.log(user);
             })
 	} else {
 		res.send('Please enter Username and Password!');
@@ -166,7 +161,6 @@ app.get('/index', (req, res) => {
     } else {
 
         db.Recipe.findAll().then(function (dataFromDB) {
-            console.log(dataFromDB);
             //res.json(dataFromDB);
             res.render('index', {
                 // title: "Your Recipe Box",
