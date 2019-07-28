@@ -56,12 +56,12 @@ app.get('/404', (req, res) => {
     res.render('404', { title: "ERROR 404" });
 });
 
-//change form to login//
+//rout to change form to login//
 app.get('/auth', (req, res) => {
     res.render('signIn', { title: "Welcome to Julias Child!", login:"true" });
 });
 
-//create new user with signUp//
+//route tocreate new user with signUp//
 app.post('/signUp', function(req, res) {
     // get user credentials from form
 	var userEmail = req.body.userEmail;
@@ -90,7 +90,7 @@ app.post('/signUp', function(req, res) {
 	}
 });
 
-//log in user//
+//rout to log in user//
 app.post('/logIn', function(req, res) {
     // get user credentials from form
 	var userEmail = req.body.userEmail;
@@ -133,8 +133,16 @@ app.get('/index', (req, res) => {
             });
         });        
     }
+});
+
+//route to log out//
+app.get('/logOut', (req, res) => {
+    req.session.loggedin = false;
+    res.redirect('/');
 
 });
+
+
                         // **HEY GURL HEY** DB stuff?  //
 // make a route to "likes" for the #heartImage (check out bamazon assingment)
 //app.post("/api/:ID") "update product where id=id" or (subtract from inventory on the bamazon)
