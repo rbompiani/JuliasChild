@@ -80,16 +80,20 @@ align-items: center;
 
 #recipeCards{
     margin: 25px 25px 25px 25px;
-    border-style: solid;
-    border-color: red;
-    float: right;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
+    float: left;
    
 }
 /* #cardIDtoMatch{
     font-size: 30px;
 } */
-
-
+                                                  /* add recipe page */
+  #addRecipeForm{
+    font-size: 40px;
+  }
+#addRecipeMeasurement, #addRecipeIngredientsID, #ingredientInputBox, #exampleFormControlInput1, #lineForAddedIngredient{
+  font-size: 25px;
+}
                                                     /* GROCERY PAGE -*/
 #itemsToBuyTitle{
     text-align: center;
