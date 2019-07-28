@@ -135,6 +135,13 @@ app.get('/index', (req, res) => {
     }
 
 });
+
+//route to log out//
+app.get('/logOut', (req, res) => {
+    req.session.loggedin = false;
+    res.redirect('/');
+
+});
                         // **HEY GURL HEY** DB stuff?  //
 // make a route to "likes" for the #heartImage (check out bamazon assingment)
 //app.post("/api/:ID") "update product where id=id" or (subtract from inventory on the bamazon)
