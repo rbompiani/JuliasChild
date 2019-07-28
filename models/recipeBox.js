@@ -2,21 +2,22 @@
 
 // Model for the RecipeBox model
 
-Module.exports = function(Sequelize, DataTypes) {
+
+module.exports = function(sequelize, DataTypes) {
     var RecipeBox = sequelize.define('RecipeBox', {
         userID: {
-            type: Sequelize.INTEGER,
-            references: {
-                model: Accounts,
-                key: 'userID'
-            }
+            type: DataTypes.INTEGER,
+            //references: {
+            //    model: Accounts.Accounts,
+            //    key: 'userID'
+            //}
         },
         recipeID: {
-            type: Sequelize.INTEGER,
-            references: {
-                model: Recipe,
-                key: 'recipeID'
-            }
+            type: DataTypes.INTEGER,
+            //references: {
+            //   model: Recipe.Recipe,
+            //    key: 'recipeID'
+            //}
         }
     });
     return RecipeBox;

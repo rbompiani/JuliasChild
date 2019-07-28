@@ -195,6 +195,7 @@ app.get('/index2', (req, res) => {
     }); 
 });
 
+
 db.sequelize.sync().then(function () {
 
 

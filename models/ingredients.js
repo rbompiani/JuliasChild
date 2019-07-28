@@ -1,15 +1,15 @@
-  
+
   // Model for the Ingredients Table
   module.exports = function(sequelize, DataTypes) {
 
-    var Ingredients = sequlelize.define('Ingredients', {
+    var Ingredients = sequelize.define('Ingredients', {
       ingredientID: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true
       },
       ingredientLines: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         validate: {
           len: {
             args: [1, 80]      
@@ -18,12 +18,14 @@
         allowNull: false
       },
       recipeID: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: Recipe,
-          key: 'recipeID'
-        }
+        type: DataTypes.INTEGER,
+        //references: {
+          //model: Recipe.Recipe,
+          //key: 'recipeID'
+        //}
       }  
     });
+
     return Ingredients;
   }
+
