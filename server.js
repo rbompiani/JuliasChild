@@ -142,6 +142,18 @@ app.get('/logOut', (req, res) => {
 
 });
 
+//testing route DELETE THIS AFTER
+app.get('/index2', (req, res) => {
+    db.Recipe.findAll().then(function (dataFromDB) {
+        console.log(dataFromDB);
+        //res.json(dataFromDB);
+        res.render('index2', {
+            // title: "Your Recipe Box",
+            data: dataFromDB
+        });
+    }); 
+});
+
 
                         // **HEY GURL HEY** DB stuff?  //
 // make a route to "likes" for the #heartImage (check out bamazon assingment)
