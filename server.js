@@ -84,10 +84,17 @@ require("./routes/apiRoutes")(app);
 
 app.get('/', (req, res) => {
     if (req.session.loggedin) {
+<<<<<<< HEAD
+		res.redirect('/index');
+	} else {
+        res.render('signIn', { title: "Welcome to Julia's Child!" });
+	}
+=======
         res.redirect('/index');
     } else {
         res.render('signIn', { title: "Welcome to Julias Child!" });
     }
+>>>>>>> 8a06949f07f24edf0e6df196e1583fdce3d1b147
 });
 
 //route to 404//
@@ -97,7 +104,11 @@ app.get('/404', (req, res) => {
 
 //change form to login//
 app.get('/auth', (req, res) => {
+<<<<<<< HEAD
+    res.render('signIn', { title: "Welcome to Julia's Child!", login:"true" });
+=======
     res.render('signIn', { title: "Welcome to Julias Child!", login: "true" });
+>>>>>>> 8a06949f07f24edf0e6df196e1583fdce3d1b147
 });
 
 //route tocreate new user with signUp//
@@ -163,7 +174,7 @@ app.get('/index', (req, res) => {
         db.Recipe.findAll().then(function (dataFromDB) {
             //res.json(dataFromDB);
             res.render('index', {
-                // title: "Your Recipe Box",
+                title: "Your Recipe Box",
                 data: dataFromDB
             });
         });        
