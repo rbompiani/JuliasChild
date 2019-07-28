@@ -9,9 +9,9 @@ CREATE TABLE IF NOT EXISTS `recipe` (
   `recipeImage` VARCHAR( 160 ) NOT NULL,
   `recipeTitle` VARCHAR( 255) NOT NULL,
   `recipeDesc` VARCHAR(48) NOT NULL,
-  `calories` VARCHAR ( 8 ),
+  `calories` VARCHAR ( 8 ), --should be an INT
   `nutrition` VARCHAR ( 240 ),
-  `cookingTime` VARCHAR(48) NOT NULL,
+  `cookingTime` VARCHAR(48) NOT NULL, --should be an INT - sec or min
   `instructions` VARCHAR ( 3000 ) NOT NULL,
 
   PRIMARY KEY ( `recipeID` ) 
