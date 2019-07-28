@@ -30,22 +30,32 @@
   </div>
 
   {{!-- ingredients --}}
-  <div class="form-group">
+ <div class="form-group">
     <label for="addRecipeIngredients">Ingredients</label>
-    <select class="form-control" name="addRecipeIngredientsID">
+    <select class="form-control" id="addRecipeMeasurement">
+      <option>1/8</option>
+      <option>1/4</option>
+      <option>1/2</option>
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+    </select>
+    <select class="form-control" id="addRecipeIngredientsID">
       <option>Teaspoon</option>
       <option>Tablespoon</option>
       <option>Cup</option>
       <option>Pinch</option>
       <option>Dash</option>
     </select>
-
-    <div class="form-group">
-      <input type="text" class="form-control" id="ingredients" placeholder="'butter'">
-      <input class="btn btn-primary" name="submitButtonAddRecipe" type="submit" value="Submit">
-    </div>
+<div class="form-group">
+    <input type="input" class="form-control" id="ingredientInputBox" placeholder="'ie: butter'">
+     <input class="btn btn-primary" id="submitButtonAddRecipe" type="submit" value="Submit">
+    
   </div>
 
+  <textarea class="form-control" id="lineForAddedIngredient" rows="3"></textarea>
   {{!-- Instructions/Directions --}}
   <div class="form-group">
     <label for="addRecipeDirections"></label>
@@ -55,6 +65,7 @@
 </form>
 </div> 
 <script>
+
  $("#submitButtonAddRecipe").on("click", function (event) {   // this is linking the clicked buttons to the GIF API, then clears//
                 event.preventDefault();
                 console.log("buttons clicked is working");

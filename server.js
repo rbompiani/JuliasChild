@@ -83,6 +83,7 @@ app.post('/submit-recipe', (req, res) => {
 
 //route to index//
 require("./routes/apiRoutes")(app);
+
 app.get('/', (req, res) => {
     if (req.session.loggedin) {
         res.redirect('/index');
@@ -97,8 +98,9 @@ app.get('/404', (req, res) => {
 });
 
 //change form to login//
-app.post('/auth', (req, res) => {
+app.get('/auth', (req, res) => {
     res.render('signIn', { title: "Welcome to Julias Child!", login: "true" });
+});
 
 //route tocreate new user with signUp//
 app.post('/signUp', function(req, res) {
@@ -220,6 +222,4 @@ db.sequelize.sync().then(function () {
     });
 });
 
-
-//make it listen to express server//
 
