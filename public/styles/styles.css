@@ -27,6 +27,18 @@
   color:white;
 }
 
+.favIcon {
+  fill: lightgray;
+}
+
+.favIcon:hover, .fav:hover {
+  fill: lightcoral;
+}
+
+.fav {
+  fill: crimson;
+}
+
                                                     /* /login  */
 form {
     display: block;
@@ -82,7 +94,7 @@ align-items: center;
   color: red;
   font-weight: bold;
 }
-  #heartImage{
+  .heartImage{
       width: 16px;
       height: 16px;
       cursor: pointer; 
