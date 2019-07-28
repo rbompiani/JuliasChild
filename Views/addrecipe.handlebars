@@ -1,28 +1,55 @@
-<form>
-                                             {{!-- add title --}}
+<form action="/submit-recipe" method="post">
+  {{!-- add title --}}
   <div class="form-group">
     <label for="addRecipeTitle">Recipe Title:</label>
-    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="'Nachos'">
+    <input type="text" class="form-control" name="recipeTitle" placeholder="'Nachos'">
   </div>
-                                             {{!-- ingredients --}}
+ 
+  {{!-- add description --}}
+  <div class="form-group">
+    <label for="addRecipeDescription">Description</label>
+    <textarea class="form-control" name="recipeDesc" rows="3"></textarea>
+  </div>
+
+  {{!-- add calories --}}
+  <div class="form-group">
+    <label for="addRecipeCalories">Calories</label>
+    <textarea class="form-control" name="calories" rows="3"></textarea>
+  </div>
+
+  {{!-- add nutrition--}}
+  <div class="form-group">
+    <label for="addRecipeNutrition">Nutrition</label>
+    <textarea class="form-control" name="nutrition" rows="3"></textarea>
+  </div>
+
+  {{!-- add cooking time--}}
+  <div class="form-group">
+    <label for="addRecipeCookingTime">Cooking Time</label>
+    <textarea class="form-control" name="cookingTime" rows="3"></textarea>
+  </div>
+
+  {{!-- ingredients --}}
   <div class="form-group">
     <label for="addRecipeIngredients">Ingredients</label>
-    <select class="form-control" id="addRecipeIngredientsID">
+    <select class="form-control" name="addRecipeIngredientsID">
       <option>Teaspoon</option>
       <option>Tablespoon</option>
       <option>Cup</option>
       <option>Pinch</option>
       <option>Dash</option>
     </select>
-<div class="form-group">
-    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="'butter'">
-     <input class="btn btn-primary" id="submitButtonAddRecipe" type="submit" value="Submit">
+
+    <div class="form-group">
+      <input type="text" class="form-control" id="ingredients" placeholder="'butter'">
+      <input class="btn btn-primary" name="submitButtonAddRecipe" type="submit" value="Submit">
+    </div>
   </div>
-  </div>
-                                            {{!-- Directions --}}
+
+  {{!-- Instructions/Directions --}}
   <div class="form-group">
-    <label for="addRecipeDirections">Directions</label>
-    <textarea class="form-control" id="addRecipeDirections" rows="3"></textarea>
+    <label for="addRecipeDirections"></label>
+    <textarea class="form-control" name="instructions" rows="3"></textarea>
   </div>
-   <input class="btn btn-primary" id="submitButtonAddRecipeFinal" type="submit" value="Submit This Recipe To Your Box!">
+  <input class="btn btn-primary" id="submitButtonAddRecipeFinal" type="submit" value="Submit This Recipe To Your Box!">
 </form>

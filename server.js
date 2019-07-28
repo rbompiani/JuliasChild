@@ -1,5 +1,7 @@
 /* ----------NPM PACKAGE DEPENDENCIES ---------*/
 //require express package//
+var http = require("http");
+
 var express = require('express');
 
 var db = require('./models');
@@ -29,9 +31,9 @@ app.set("view engine", "handlebars");
 
 //use session//
 app.use(session({
-	secret: 'secret',
-	resave: true,
-	saveUninitialized: true
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
 }));
 
 
@@ -43,14 +45,52 @@ app.get('/addrecipe', (req, res) => {
     res.render('addrecipe', { title: "Add A Recipe" });
 });
 
+//should submit-recipe to database//
+app.post('/submit-recipe', (req, res) => {
+    console.log('alert routing');
+    //var recipe = req.body.recipe;
+    var recipeTitle = req.body.recipeTitle;
+    var recipeDesc = req.body.recipeDesc;
+    var calories = req.body.calories;
+    var nutrition = req.body.nutrition;
+    //var cookingTime = req.body.cookingTime;
+    var instructions = req.body.instructions;
+    console.log(recipeTitle, recipeDesc, calories, nutrition, instructions);
+   if (recipeTitle && recipeDesc && calories && nutrition && instructions) {
+        db.Recipe
+            .findOrCreate({
+                where:
+                {
+                    recipeTitle: recipeTitle,
+                    recipeDesc: recipeDesc,
+                    calories: calories,
+                    nutrition: nutrition,
+                    instructions: instructions
+                }
+            })
+            .then(([recipe, created]) => {
+                console.log(recipe.get({ plain: true }))
+                if (created) {
+                    //req.session.loggedin = true;
+                    //req.session.addRecipeDirections = submitButtonAddRecipeFinal;
+                    res.redirect('/index', 302);
+                } else {
+                    res.send('You seem to be missing some information...');
+                    res.end();
+                }
+                console.log(created);
+
+            });
+    };
+})
 
 //route to index//
 app.get('/', (req, res) => {
     if (req.session.loggedin) {
-		res.redirect('/index');
-	} else {
+        res.redirect('/index');
+    } else {
         res.render('signIn', { title: "Welcome to Julias Child!" });
-	}
+    }
 });
 
 //route to 404//
@@ -59,22 +99,22 @@ app.get('/404', (req, res) => {
 });
 
 //change form to login//
-app.get('/auth', (req, res) => {
-    res.render('signIn', { title: "Welcome to Julias Child!", login:"true" });
+app.post('/auth', (req, res) => {
+    res.render('signIn', { title: "Welcome to Julias Child!", login: "true" });
 });
 
 //create new user with signUp//
-app.post('/signUp', function(req, res) {
-	var userEmail = req.body.userEmail;
-	var userPassword = req.body.userPass;
-	if (userEmail && userPassword) {
+app.post('/signUp', function (req, res) {
+    var userEmail = req.body.userEmail;
+    var userPassword = req.body.userPass;
+    if (userEmail && userPassword) {
         db.Accounts
-            .findOrCreate({where: {email: userEmail}, defaults: {password: userPassword}})
+            .findOrCreate({ where: { email: userEmail }, defaults: { password: userPassword } })
             .then(([user, created]) => {
                 console.log(user.get({
-                plain: true
-            }))
-                if(created){
+                    plain: true
+                }))
+                if (created) {
                     req.session.loggedin = true;
                     req.session.username = userEmail;
                     res.redirect('/index');
@@ -83,15 +123,16 @@ app.post('/signUp', function(req, res) {
                 }
                 console.log(created);
             })
-	} else {
-		res.send('Please enter Username and Password!');
-		res.end();
-	}
+    } else {
+        res.send('Please enter Username and Password!');
+        res.end();
+    }
 });
+
 
 //route to index//
 app.get('/index', (req, res) => {
-   
+
     // ** backend person- replace this info with the DB info // -sam
     var recipes = [
         {
@@ -123,7 +164,7 @@ app.get('/index', (req, res) => {
     });
 
 });
-                        // **HEY GURL HEY** DB stuff?  //
+// **HEY GURL HEY** DB stuff?  //
 // make a route to "likes" for the #heartImage (check out bamazon assingment)
 //app.post("/api/:ID") "update product where id=id" or (subtract from inventory on the bamazon)
 //look into sorting function on the database stuff ie "Most liked recipes"
