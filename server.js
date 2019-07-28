@@ -47,7 +47,7 @@ app.get('/', (req, res) => {
     if (req.session.loggedin) {
 		res.redirect('/index');
 	} else {
-        res.render('signIn', { title: "Welcome to Julias Child!" });
+        res.render('signIn', { title: "Welcome to Julia's Child!" });
 	}
 });
 
@@ -58,7 +58,7 @@ app.get('/404', (req, res) => {
 
 //rout to change form to login//
 app.get('/auth', (req, res) => {
-    res.render('signIn', { title: "Welcome to Julias Child!", login:"true" });
+    res.render('signIn', { title: "Welcome to Julia's Child!", login:"true" });
 });
 
 //route tocreate new user with signUp//
@@ -128,7 +128,7 @@ app.get('/index', (req, res) => {
             console.log(dataFromDB);
             //res.json(dataFromDB);
             res.render('index', {
-                // title: "Your Recipe Box",
+                title: "Your Recipe Box",
                 data: dataFromDB
             });
         });        
