@@ -41,9 +41,7 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 //db.Recipe.hasMany(db.Ingredients);
-db.Ingredients.belongsTo(db.Recipe, {through: "recipeID"});
-db.Accounts.belongsTo(db.RecipeBox, {through: "userID"});
-db.Recipe.belongsTo(db.RecipeBox, {through: "recipeID"});
+
 
 
 
