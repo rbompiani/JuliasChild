@@ -1,12 +1,47 @@
-<form>
-                                             {{!-- add title --}}
+<form action="/submit-recipe" method="post">
+  {{!-- add title --}}
   <div class="form-group">
     <label for="addRecipeTitle">Recipe Title:</label>
-    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="'Nachos'">
+    <input type="text" class="form-control" name="recipeTitle" placeholder="'Nachos'">
   </div>
-                                             {{!-- ingredients --}}
+ 
+  {{!-- add description --}}
   <div class="form-group">
+    <label for="addRecipeDescription">Description</label>
+    <textarea class="form-control" name="recipeDesc" rows="3"></textarea>
+  </div>
+
+  {{!-- add calories --}}
+  <div class="form-group">
+    <label for="addRecipeCalories">Calories</label>
+    <textarea class="form-control" name="calories" rows="3"></textarea>
+  </div>
+
+  {{!-- add nutrition--}}
+  <div class="form-group">
+    <label for="addRecipeNutrition">Nutrition</label>
+    <textarea class="form-control" name="nutrition" rows="3"></textarea>
+  </div>
+
+  {{!-- add cooking time--}}
+  <div class="form-group">
+    <label for="addRecipeCookingTime">Cooking Time</label>
+    <textarea class="form-control" name="cookingTime" rows="3"></textarea>
+  </div>
+
+  {{!-- ingredients --}}
+ <div class="form-group">
     <label for="addRecipeIngredients">Ingredients</label>
+    <select class="form-control" id="addRecipeMeasurement">
+      <option>1/8</option>
+      <option>1/4</option>
+      <option>1/2</option>
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+    </select>
     <select class="form-control" id="addRecipeIngredientsID">
       <option>Teaspoon</option>
       <option>Tablespoon</option>
@@ -15,14 +50,31 @@
       <option>Dash</option>
     </select>
 <div class="form-group">
-    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="'butter'">
+    <input type="input" class="form-control" id="ingredientInputBox" placeholder="'ie: butter'">
      <input class="btn btn-primary" id="submitButtonAddRecipe" type="submit" value="Submit">
+    
   </div>
-  </div>
-                                            {{!-- Directions --}}
+
+  <textarea class="form-control" id="lineForAddedIngredient" rows="3"></textarea>
+  {{!-- Instructions/Directions --}}
   <div class="form-group">
-    <label for="addRecipeDirections">Directions</label>
-    <textarea class="form-control" id="addRecipeDirections" rows="3"></textarea>
+    <label for="addRecipeDirections"></label>
+    <textarea class="form-control" name="instructions" rows="3"></textarea>
   </div>
    <input class="btn btn-primary" id="submitButtonAddRecipeFinal" type="submit" value="Submit This Recipe To Your Box!">
 </form>
+</div> 
+<script>
+
+ $("#submitButtonAddRecipe").on("click", function (event) {   // this is linking the clicked buttons to the GIF API, then clears//
+                event.preventDefault();
+                console.log("buttons clicked is working");
+                var addedIngredient= $("#ingredientInputBox").val();
+                var addedSizeIngredient=$("#addRecipeIngredientsID").val();
+                var addRecipeMeasurement=$("#addRecipeMeasurement").val();
+                console.log("addedsize is working : " + addedSizeIngredient);
+
+                console.log("addedIngredient is working : " + addedIngredient);
+                $("#lineForAddedIngredient").append(addRecipeMeasurement + " "+ addedSizeIngredient + " " +  addedIngredient  + "," + " ");
+ });
+</script>

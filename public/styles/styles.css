@@ -16,6 +16,29 @@
     font-family: 'Tangerine', cursive;
 }
 
+#logOut{
+  font-family: sans-serif;
+  color: white;
+  font-weight: bolder;
+  text-shadow: 1px 1px 3px rgba(0,0,0,.7);
+}
+
+#logOut>a {
+  color:white;
+}
+
+.favIcon {
+  fill: lightgray;
+}
+
+.favIcon:hover, .fav:hover {
+  fill: lightcoral;
+}
+
+.fav {
+  fill: crimson;
+}
+
                                                     /* /login  */
 form {
     display: block;
@@ -71,25 +94,26 @@ align-items: center;
   color: red;
   font-weight: bold;
 }
-  #heartImage{
+  .heartImage{
       width: 16px;
       height: 16px;
       cursor: pointer; 
       color: red;
   }
 
-#recipeCards{
-    margin: 25px 25px 25px 25px;
-    border-style: solid;
-    border-color: red;
-    float: right;
-   
+.recipeCards{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5); 
 }
 /* #cardIDtoMatch{
     font-size: 30px;
 } */
-
-
+                                                  /* add recipe page */
+  #addRecipeForm{
+    font-size: 40px;
+  }
+#addRecipeMeasurement, #addRecipeIngredientsID, #ingredientInputBox, #exampleFormControlInput1, #lineForAddedIngredient{
+  font-size: 25px;
+}
                                                     /* GROCERY PAGE -*/
 #itemsToBuyTitle{
     text-align: center;
