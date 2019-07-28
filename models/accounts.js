@@ -1,21 +1,21 @@
 
 // Model for the Accounts(Users) Table
-module.exports = function(Sequelize, DataTypes) {
+module.exports = function(sequelize, DataTypes) {
     var Accounts = sequelize.define('Accounts', {
         userID: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true
         },
         email: {
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             allowNull: false,
             len: {
                 args: [1, 100]
             }
         },
         password: {
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             allowNull: false,
             len: {
                 args: [1, 255]

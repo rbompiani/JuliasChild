@@ -3,12 +3,12 @@ module.exports = function(sequelize, DataTypes) {
 
   var Recipe = sequelize.define('Recipe', {
     recipeID: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true
       },
       recipeImage: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         validate: {
           len: {
             args: [0, 160]      
@@ -16,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
         }
       },
       recipeTitle: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         validate: {
           len: {
             args: [1, 255]      
@@ -25,7 +25,7 @@ module.exports = function(sequelize, DataTypes) {
         allowNull: false
       },
       recipeDesc: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         validate: {
           len: {
             args: [0, 80]      
@@ -33,7 +33,7 @@ module.exports = function(sequelize, DataTypes) {
         }
       },
       instructions: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         validate: {
           len: {
             args: [1, 3000]      
