@@ -115,14 +115,24 @@ app.get('/index', (req, res) => {
     if(!req.session.loggedin){
         res.redirect('/');
     } else {
-
-        db.Recipe.findAll().then(function (dataFromDB) {
-            //res.json(dataFromDB);
-            res.render('index', {
-                title: "Your Recipe Box",
-                data: dataFromDB
-            });
-        });        
+        var userEmail = req.session.username;
+        db.Accounts.findOne({ where: {email: userEmail} }).then(user => {
+            db.RecipeBox.findAll({where: {userID: user.userID}})
+            .then((recipeMatches, created)=>{
+                var matches=[];
+                recipeMatches.forEach(e=>{
+                    console.log(e.recipeID);
+                    matches.push(e.recipeID);
+                })
+                console.log(matches);
+                db.Recipe.findAll({where: {recipeID: matches}}).then(recipes=>{
+                   res.render('index', {
+                      title: "Your Recipe Box",
+                      data: recipes
+                  });
+                })
+            })
+        });      
     }
 });
 
