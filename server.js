@@ -112,7 +112,6 @@ app.post('/logIn', function(req, res) {
 
 //route to index//
 app.get('/index', (req, res) => {
-    console.log(req.session.loggedin);
     if(!req.session.loggedin){
         res.redirect('/');
     } else {
@@ -160,7 +159,7 @@ app.post('/submit-recipe', (req, res) => {
 
                 db.Accounts.findOne({ where: {email: userEmail} }).then(user => {
                     db.RecipeBox.create({ userID: user.userID, recipeID: recipe.recipeID })
-                    .then((created)=>{
+                    .then(created=>{
                         res.redirect('/index', 302);
                     })
                 });
@@ -172,17 +171,49 @@ app.post('/submit-recipe', (req, res) => {
 //route to search API//
 require("./routes/apiRoutes")(app);
 
-app.get('/saveRecipe/:recipeIdx', function(req, res) {
+app.get('/addFavorite/', function(req, res) {
+    console.log("saving a recipe...");
+
+    db.Recipe
+    .findOrCreate({
+        where:
+        {
+            recipeImage: req.query.img,
+            recipeTitle: req.query.title,
+            recipeDesc: req.query.desc,
+            instructions: "..."
+        }
+    })
+    .then(([recipe, created]) => {
+        var userEmail = req.session.username;
+
+        db.Accounts.findOne({ where: {email: userEmail} }).then(user => {
+            db.RecipeBox.create({ userID: user.userID, recipeID: recipe.recipeID })
+            .then((created)=>{
+                console.log("ITWORKED!");
+                res.redirect(302, '/index');
+            })
+        });
+        
+    });
+ })
+
+app.get('/removeFavorite/:recipeIdx', function(req, res) {
     var userEmail = req.session.username;
     console.log(req.params.recipeIdx);
     var recipeIdx = req.params.recipeIdx;
+    if (!recipeIdx){
+        console.log("aint no index here!", recipeIdx);
+    } else {
+        console.log("your recipe index is ", recipeIdx);
+    }
 
-        db.Accounts.findOne({ where: {email: userEmail} }).then(user => {
-            db.RecipeBox.create({ userID: user.userID, recipeID: recipeIdx })
-            .then((created)=>{
-                res.redirect('/index', 302);
-            })
-        });
+        //db.Accounts.findOne({ where: {email: userEmail} }).then(user => {
+        //    db.RecipeBox.create({ userID: user.userID, recipeID: recipeIdx })
+        //    .then((created)=>{
+        //      res.redirect('/index', 302);
+        //    })
+        //});
  })
 
 //route to log out//
