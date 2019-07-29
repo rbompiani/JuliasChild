@@ -172,6 +172,19 @@ app.post('/submit-recipe', (req, res) => {
 //route to search API//
 require("./routes/apiRoutes")(app);
 
+app.get('/saveRecipe/:recipeIdx', function(req, res) {
+    var userEmail = req.session.username;
+    console.log(req.params.recipeIdx);
+    var recipeIdx = req.params.recipeIdx;
+
+        db.Accounts.findOne({ where: {email: userEmail} }).then(user => {
+            db.RecipeBox.create({ userID: user.userID, recipeID: recipeIdx })
+            .then((created)=>{
+                res.redirect('/index', 302);
+            })
+        });
+ })
+
 //route to log out//
 app.get('/logOut', (req, res) => {
     req.session.loggedin = false;
