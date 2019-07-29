@@ -144,12 +144,11 @@ app.get('/addrecipe', (req, res) => {
 //should submit-recipe to database//
 app.post('/submit-recipe', (req, res) => {
     console.log('alert routing');
-    //var recipe = req.body.recipe;
     var recipeImage=("/images/fooddefault.jpeg");
     var recipeTitle = req.body.recipeTitle;
     var recipeDesc = req.body.recipeDesc;
-    //var cookingTime = req.body.cookingTime;
     var instructions = req.body.instructions;
+    var ingredientLines= req.body.ingredientLines;   // <--- THIS ISNT WORKING-sam//
     console.log(recipeTitle, recipeDesc, instructions);
    if (recipeTitle && recipeDesc && instructions) {
         db.Recipe
@@ -159,8 +158,8 @@ app.post('/submit-recipe', (req, res) => {
                     recipeImage: recipeImage,
                     recipeTitle: recipeTitle,
                     recipeDesc: recipeDesc,
-                    instructions: instructions
-                 
+                    instructions: instructions,
+                   
                 }
             })
             .then(([recipe, created]) => {
@@ -194,7 +193,7 @@ app.get('/addFavorite/', function(req, res) {
             recipeImage: req.query.img,
             recipeTitle: req.query.title,
             recipeDesc: req.query.desc,
-            instructions: "..."
+            
         }
     })
     .then(([recipe, created]) => {
