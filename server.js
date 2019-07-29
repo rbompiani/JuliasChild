@@ -145,6 +145,7 @@ app.get('/addrecipe', (req, res) => {
 app.post('/submit-recipe', (req, res) => {
     console.log('alert routing');
     //var recipe = req.body.recipe;
+    var recipeImage=("/images/fooddefault.jpeg");
     var recipeTitle = req.body.recipeTitle;
     var recipeDesc = req.body.recipeDesc;
     //var cookingTime = req.body.cookingTime;
@@ -155,9 +156,11 @@ app.post('/submit-recipe', (req, res) => {
             .findOrCreate({
                 where:
                 {
+                    recipeImage: recipeImage,
                     recipeTitle: recipeTitle,
                     recipeDesc: recipeDesc,
                     instructions: instructions
+                 
                 }
             })
             .then(([recipe, created]) => {
