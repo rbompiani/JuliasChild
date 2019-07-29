@@ -37,51 +37,8 @@ app.use(session({
 }));
 
 /* ----------THESE SHOULD EVENTUALLY MIGRATE TO ROUTES FILES ---------*/
-//route to addrecipe//
-app.get('/addrecipe', (req, res) => {
-    res.render('addrecipe', { title: "Add A Recipe" });
-});
 
-//should submit-recipe to database//
-app.post('/submit-recipe', (req, res) => {
-    console.log('alert routing');
-    //var recipe = req.body.recipe;
-    var recipeTitle = req.body.recipeTitle;
-    var recipeDesc = req.body.recipeDesc;
-    //var cookingTime = req.body.cookingTime;
-    var instructions = req.body.instructions;
-    console.log(recipeTitle, recipeDesc, instructions);
-   if (recipeTitle && recipeDesc && instructions) {
-        db.Recipe
-            .findOrCreate({
-                where:
-                {
-                    recipeTitle: recipeTitle,
-                    recipeDesc: recipeDesc,
-                    instructions: instructions
-                }
-            })
-            .then(([recipe, created]) => {
-                if (!created) {
-                    res.send('You seem to be missing some information...');
-                    res.end();
-                }
-                var userEmail = req.session.username;
-
-                db.Accounts.findOne({ where: {email: userEmail} }).then(user => {
-                    db.RecipeBox.create({ userID: user.userID, recipeID: recipe.recipeID })
-                    .then((created)=>{
-                        res.redirect('/index', 302);
-                    })
-                });
-                
-            });
-    };
-})
-
-//route to index//
-require("./routes/apiRoutes")(app);
-
+//catch all route//
 app.get('/', (req, res) => {
     if (req.session.loggedin) {
 		res.redirect('/index');
@@ -93,11 +50,6 @@ app.get('/', (req, res) => {
 //route to 404//
 app.get('/404', (req, res) => {
     res.render('404', { title: "ERROR 404" });
-});
-
-//change form to login//
-app.get('/auth', (req, res) => {
-    res.render('signIn', { title: "Welcome to Julia's Child!", login:"true" });
 });
 
 //route tocreate new user with signUp//
@@ -126,6 +78,11 @@ app.post('/signUp', function(req, res) {
         res.send('Please enter Username and Password!');
         res.end();
     }
+});
+
+//change form to login//
+app.get('/auth', (req, res) => {
+    res.render('signIn', { title: "Welcome to Julia's Child!", login:"true" });
 });
 
 //rout to log in user//
@@ -170,6 +127,51 @@ app.get('/index', (req, res) => {
     }
 });
 
+//route to addrecipe//
+app.get('/addrecipe', (req, res) => {
+    res.render('addrecipe', { title: "Add A Recipe" });
+});
+
+//should submit-recipe to database//
+app.post('/submit-recipe', (req, res) => {
+    console.log('alert routing');
+    //var recipe = req.body.recipe;
+    var recipeTitle = req.body.recipeTitle;
+    var recipeDesc = req.body.recipeDesc;
+    //var cookingTime = req.body.cookingTime;
+    var instructions = req.body.instructions;
+    console.log(recipeTitle, recipeDesc, instructions);
+   if (recipeTitle && recipeDesc && instructions) {
+        db.Recipe
+            .findOrCreate({
+                where:
+                {
+                    recipeTitle: recipeTitle,
+                    recipeDesc: recipeDesc,
+                    instructions: instructions
+                }
+            })
+            .then(([recipe, created]) => {
+                if (!created) {
+                    res.send('You seem to be missing some information...');
+                    res.end();
+                }
+                var userEmail = req.session.username;
+
+                db.Accounts.findOne({ where: {email: userEmail} }).then(user => {
+                    db.RecipeBox.create({ userID: user.userID, recipeID: recipe.recipeID })
+                    .then((created)=>{
+                        res.redirect('/index', 302);
+                    })
+                });
+                
+            });
+    };
+})
+
+//route to search API//
+require("./routes/apiRoutes")(app);
+
 //route to log out//
 app.get('/logOut', (req, res) => {
     req.session.loggedin = false;
@@ -177,19 +179,8 @@ app.get('/logOut', (req, res) => {
 
 });
 
-//testing route DELETE THIS AFTER
-app.get('/index2', (req, res) => {
-    db.Recipe.findAll().then(function (dataFromDB) {
-        console.log(dataFromDB);
-        //res.json(dataFromDB);
-        res.render('index2', {
-            // title: "Your Recipe Box",
-            data: dataFromDB
-        });
-    }); 
-});
 
-
+//sync database with sequelize
 db.sequelize.sync().then(function () {
 
 
