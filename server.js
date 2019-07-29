@@ -37,6 +37,105 @@ app.use(session({
 }));
 
 /* ----------THESE SHOULD EVENTUALLY MIGRATE TO ROUTES FILES ---------*/
+
+//catch all route//
+app.get('/', (req, res) => {
+    if (req.session.loggedin) {
+		res.redirect('/index');
+	} else {
+        res.render('signIn', { title: "Welcome to Julia's Child!" });
+	}
+});
+
+//route to 404//
+app.get('/404', (req, res) => {
+    res.render('404', { title: "ERROR 404" });
+});
+
+//route tocreate new user with signUp//
+app.post('/signUp', function(req, res) {
+    // get user credentials from form
+	var userEmail = req.body.userEmail;
+    var userPassword = req.body.userPass;
+    
+    //if both email and password are present, add an account to the database
+	if (userEmail && userPassword) {
+        db.Accounts
+            .findOrCreate({ where: { email: userEmail }, defaults: { password: userPassword } })
+            .then(([user, created]) => {
+                console.log(user.get({
+                    plain: true
+                }))
+                if (created) {
+                    req.session.loggedin = true;
+                    req.session.username = userEmail;
+                    res.redirect('/index');
+                } else {
+                    res.send('This account already exists!');
+                }
+            })
+    } else {
+        res.send('Please enter Username and Password!');
+        res.end();
+    }
+});
+
+//change form to login//
+app.get('/auth', (req, res) => {
+    res.render('signIn', { title: "Welcome to Julia's Child!", login:"true" });
+});
+
+//rout to log in user//
+app.post('/logIn', function(req, res) {
+    // get user credentials from form
+	var userEmail = req.body.userEmail;
+    var userPassword = req.body.userPass;
+    
+    //if both email and password are present, add an account to the database
+	if (userEmail && userPassword) {
+        db.Accounts
+            .findOne({where: {email: userEmail, password: userPassword}})
+            .then(user => {
+                if(user){
+                    req.session.loggedin = true;
+                    req.session.username = userEmail;
+                    res.redirect('/index');
+                } else {
+                    res.send('Wrong email and password!');
+                }
+            })
+	} else {
+		res.send('Please enter Username and Password!');
+		res.end();
+	}
+});
+
+//route to index//
+app.get('/index', (req, res) => {
+    if(!req.session.loggedin){
+        res.redirect('/');
+    } else {
+        var userEmail = req.session.username;
+        db.Accounts.findOne({ where: {email: userEmail} }).then(user => {
+            db.RecipeBox.findAll({where: {userID: user.userID}})
+            .then((recipeMatches, created)=>{
+                var matches=[];
+                recipeMatches.forEach(e=>{
+                    console.log(e.recipeID);
+                    matches.push(e.recipeID);
+                })
+                console.log(matches);
+                db.Recipe.findAll({where: {recipeID: matches}}).then(recipes=>{
+                   res.render('index', {
+                      title: "Your Recipe Box",
+                      data: recipes
+                  });
+                })
+            })
+        });      
+    }
+});
+
 //route to addrecipe//
 app.get('/addrecipe', (req, res) => {
     res.render('addrecipe', { title: "Add A Recipe" });
@@ -70,7 +169,7 @@ app.post('/submit-recipe', (req, res) => {
 
                 db.Accounts.findOne({ where: {email: userEmail} }).then(user => {
                     db.RecipeBox.create({ userID: user.userID, recipeID: recipe.recipeID })
-                    .then((created)=>{
+                    .then(created=>{
                         res.redirect('/index', 302);
                     })
                 });
@@ -79,96 +178,53 @@ app.post('/submit-recipe', (req, res) => {
     };
 })
 
-//route to index//
+//route to search API//
 require("./routes/apiRoutes")(app);
 
-app.get('/', (req, res) => {
-    if (req.session.loggedin) {
-		res.redirect('/index');
-	} else {
-        res.render('signIn', { title: "Welcome to Julia's Child!" });
-	}
-});
+app.get('/addFavorite/', function(req, res) {
+    console.log("saving a recipe...");
 
-//route to 404//
-app.get('/404', (req, res) => {
-    res.render('404', { title: "ERROR 404" });
-});
+    db.Recipe
+    .findOrCreate({
+        where:
+        {
+            recipeImage: req.query.img,
+            recipeTitle: req.query.title,
+            recipeDesc: req.query.desc,
+            instructions: "..."
+        }
+    })
+    .then(([recipe, created]) => {
+        var userEmail = req.session.username;
 
-//change form to login//
-app.get('/auth', (req, res) => {
-    res.render('signIn', { title: "Welcome to Julia's Child!", login:"true" });
-});
-
-//route tocreate new user with signUp//
-app.post('/signUp', function(req, res) {
-    // get user credentials from form
-	var userEmail = req.body.userEmail;
-    var userPassword = req.body.userPass;
-    
-    //if both email and password are present, add an account to the database
-	if (userEmail && userPassword) {
-        db.Accounts
-            .findOrCreate({ where: { email: userEmail }, defaults: { password: userPassword } })
-            .then(([user, created]) => {
-                console.log(user.get({
-                    plain: true
-                }))
-                if (created) {
-                    req.session.loggedin = true;
-                    req.session.username = userEmail;
-                    res.redirect('/index');
-                } else {
-                    res.send('This account already exists!');
-                }
+        db.Accounts.findOne({ where: {email: userEmail} }).then(user => {
+            db.RecipeBox.create({ userID: user.userID, recipeID: recipe.recipeID })
+            .then((created)=>{
+                console.log("ITWORKED!");
+                res.redirect(302, '/index');
             })
+        });
+        
+    });
+ })
+
+app.get('/removeFavorite/:recipeIdx', function(req, res) {
+    var userEmail = req.session.username;
+    console.log(req.params.recipeIdx);
+    var recipeIdx = req.params.recipeIdx;
+    if (!recipeIdx){
+        console.log("aint no index here!", recipeIdx);
     } else {
-        res.send('Please enter Username and Password!');
-        res.end();
+        console.log("your recipe index is ", recipeIdx);
     }
-});
 
-//rout to log in user//
-app.post('/logIn', function(req, res) {
-    // get user credentials from form
-	var userEmail = req.body.userEmail;
-    var userPassword = req.body.userPass;
-    
-    //if both email and password are present, add an account to the database
-	if (userEmail && userPassword) {
-        db.Accounts
-            .findOne({where: {email: userEmail, password: userPassword}})
-            .then(user => {
-                if(user){
-                    req.session.loggedin = true;
-                    req.session.username = userEmail;
-                    res.redirect('/index');
-                } else {
-                    res.send('Wrong email and password!');
-                }
-            })
-	} else {
-		res.send('Please enter Username and Password!');
-		res.end();
-	}
-});
-
-//route to index//
-app.get('/index', (req, res) => {
-    console.log(req.session.loggedin);
-    if(!req.session.loggedin){
-        res.redirect('/');
-    } else {
-
-        db.Recipe.findAll().then(function (dataFromDB) {
-            //res.json(dataFromDB);
-            res.render('index', {
-                title: "Your Recipe Box",
-                data: dataFromDB
-            });
-        });        
-    }
-});
+        //db.Accounts.findOne({ where: {email: userEmail} }).then(user => {
+        //    db.RecipeBox.create({ userID: user.userID, recipeID: recipeIdx })
+        //    .then((created)=>{
+        //      res.redirect('/index', 302);
+        //    })
+        //});
+ })
 
 //route to log out//
 app.get('/logOut', (req, res) => {
@@ -177,19 +233,8 @@ app.get('/logOut', (req, res) => {
 
 });
 
-//testing route DELETE THIS AFTER
-app.get('/index2', (req, res) => {
-    db.Recipe.findAll().then(function (dataFromDB) {
-        console.log(dataFromDB);
-        //res.json(dataFromDB);
-        res.render('index2', {
-            // title: "Your Recipe Box",
-            data: dataFromDB
-        });
-    }); 
-});
 
-
+//sync database with sequelize
 db.sequelize.sync().then(function () {
 
 
