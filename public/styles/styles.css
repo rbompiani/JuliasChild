@@ -21,7 +21,7 @@
   font-weight: bold;
 }
 
-#logOut{
+#logOutButton{
   font-family: sans-serif;
   color: white;
   font-weight: bolder;
@@ -29,12 +29,19 @@
   border-style: solid;
   border-color: white;
   border-radius: 40px;
-  margin: 10px 10px 10px 1180px;
-
+  padding: 0px 10px 0px 10px;
+  text-decoration:none;
 }
 
-#logOut>a {
-  color:white;
+#logOutButton:hover {
+  background-color: white;
+  color:rgb(11, 136, 28);
+  text-shadow: none;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
 }
 
 .favIcon {
@@ -50,22 +57,17 @@
 }
 
                                                     /* /login  */
-form {
-    display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
+.smallForm {
+  max-width: 400px;
+  margin: auto
 }
 
-#submitLoginButton{
-  margin: 20px;
+.largeForm {
+  max-width: 400px;
+  margin: auto
 }
-#userEmail, #exampleInputPassword1{
-    font-size: 30px;
-}
-#signUpID, #logInID{
-    font-size: 70px;
-}
+
+
                                                     /* /index*/
 #yourRecipeBox{
     text-align: center;

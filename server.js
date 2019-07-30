@@ -121,10 +121,8 @@ app.get('/index', (req, res) => {
             .then((recipeMatches, created)=>{
                 var matches=[];
                 recipeMatches.forEach(e=>{
-                    console.log(e.recipeID);
                     matches.push(e.recipeID);
                 })
-                console.log(matches);
                 db.Recipe.findAll({where: {recipeID: matches}}).then(recipes=>{
                    res.render('index', {
                       title: "Your Recipe Box",
@@ -239,7 +237,7 @@ app.get('/logOut', (req, res) => {
 //sync database with sequelize
 db.sequelize.sync().then(function () {
 
-
+    //------------Uncomment for database starter recipe------//
     // db.Recipe.create(thingToSave).then(function (stuffFromSQL) {
     //     console.log(stuffFromSQL);
     // });
