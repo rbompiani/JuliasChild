@@ -36,7 +36,7 @@ module.exports = function(sequelize, DataTypes) {
         type: DataTypes.STRING,
         validate: {
           len: {
-            args: [1, 3000]      
+            args: [1, 5000]      
           }
         }
       },
@@ -44,7 +44,7 @@ module.exports = function(sequelize, DataTypes) {
         type: DataTypes.STRING,
         validate: {
           len: {
-            args: [1, 3000]      
+            args: [1, 5000]      
           }
         }
       }

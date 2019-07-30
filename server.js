@@ -224,18 +224,19 @@ app.get('/removeFavorite/:recipeIdx', function(req, res) {
     var userEmail = req.session.username;
     console.log(req.params.recipeIdx);
     var recipeIdx = req.params.recipeIdx;
+
     if (!recipeIdx){
         console.log("aint no index here!", recipeIdx);
     } else {
         console.log("your recipe index is ", recipeIdx);
     }
 
-        //db.Accounts.findOne({ where: {email: userEmail} }).then(user => {
-        //    db.RecipeBox.create({ userID: user.userID, recipeID: recipeIdx })
-        //    .then((created)=>{
-        //      res.redirect('/index', 302);
-        //    })
-        //});
+        db.Accounts.findOne({ where: {email: userEmail} }).then(user => {
+            db.RecipeBox.destroy({ where: {userID: user.userID, recipeID: recipeIdx }})
+            .then((destroyed)=>{
+                console.log("entry destroyed!");
+            })
+        });
  })
 
 //route to log out//
