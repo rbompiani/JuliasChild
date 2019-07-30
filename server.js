@@ -202,6 +202,7 @@ app.get('/addFavorite/', function(req, res) {
             recipeImage: req.query.img,
             recipeTitle: req.query.title,
             recipeDesc: req.query.desc,
+            ingredients: req.query.ing
             
         }
     })

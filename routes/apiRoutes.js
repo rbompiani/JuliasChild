@@ -56,7 +56,8 @@ module.exports = function(app) {
                       recipeTitle: item.recipe.label,
                       recipeImage: item.recipe.image,
                       ingredientArray: ingredients,
-                      recipeDesc: item.recipe.healthLabels
+                      recipeDesc: item.recipe.healthLabels,
+                      ingredients: item.recipe.ingredientLines
                    });
                   
               });

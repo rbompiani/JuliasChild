@@ -123,7 +123,8 @@
         var recImage = $(this).data("img");
         var recTitle = $(this).data("title");
         var recDesc = $(this).data("desc");
-        console.log (recImage, recTitle, recDesc);
+        var recIng = $(this).data("ing");
+        console.log (recImage, recTitle, recDesc, recIng);
 
         //cards with a value have been favorited - remove them
         if ($(this).data("val")){
@@ -132,7 +133,7 @@
         //cards without a value are from the api - add them to the recipeBox
         } else {
            console.log("this is NOT a saved recipe");
-           $.get("/addFavorite/", {img:recImage, title:recTitle, desc: recDesc}, function(){
+           $.get("/addFavorite/", {img:recImage, title:recTitle, desc: recDesc, ing:recIng}, function(){
                 window.location.replace("/");
            })
             //$.get("/addFavorite/", {img: recImage, title: recTitle, desc: recDesc});
