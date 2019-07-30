@@ -124,6 +124,11 @@ app.get('/index', (req, res) => {
                     matches.push(e.recipeID);
                 })
                 db.Recipe.findAll({where: {recipeID: matches}}).then(recipes=>{
+                    recipes.map(recipe=>{
+                        recipe.ingredientArray=recipe.ingredients.split(",");
+                        recipe.ingredientArray.pop();
+                        console.log(recipe.ingredients);
+                    })
                    res.render('index', {
                       title: "Your Recipe Box",
                       data: recipes
