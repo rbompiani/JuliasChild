@@ -121,11 +121,14 @@ app.get('/index', (req, res) => {
             .then((recipeMatches, created)=>{
                 var matches=[];
                 recipeMatches.forEach(e=>{
-                    console.log(e.recipeID);
                     matches.push(e.recipeID);
                 })
-                console.log(matches);
                 db.Recipe.findAll({where: {recipeID: matches}}).then(recipes=>{
+                    recipes.map(recipe=>{
+                        recipe.ingredientArray=recipe.ingredients.split(",");
+                        recipe.ingredientArray.pop();
+                        console.log(recipe.ingredients);
+                    })
                    res.render('index', {
                       title: "Your Recipe Box",
                       data: recipes
@@ -143,13 +146,18 @@ app.get('/addrecipe', (req, res) => {
 
 //should submit-recipe to database//
 app.post('/submit-recipe', (req, res) => {
-    console.log('alert routing');
+    console.log('storing a recipe...');
+
     var recipeImage=("/images/fooddefault.jpeg");
+    if(req.body.recipeImage){
+        recipeImage = req.body.recipeImage;
+    }
     var recipeTitle = req.body.recipeTitle;
     var recipeDesc = req.body.recipeDesc;
     var instructions = req.body.instructions;
-    var ingredientLines= req.body.ingredientLines;   // <--- THIS ISNT WORKING-sam//
-    console.log(recipeTitle, recipeDesc, instructions);
+    var ingredientLines = req.body.recipeIngredients;  
+
+
    if (recipeTitle && recipeDesc && instructions) {
         db.Recipe
             .findOrCreate({
@@ -159,12 +167,13 @@ app.post('/submit-recipe', (req, res) => {
                     recipeTitle: recipeTitle,
                     recipeDesc: recipeDesc,
                     instructions: instructions,
+                    ingredients: ingredientLines
                    
                 }
             })
             .then(([recipe, created]) => {
                 if (!created) {
-                    res.send('You seem to be missing some information...');
+                    res.send('Something went wrong');
                     res.end();
                 }
                 var userEmail = req.session.username;
@@ -193,6 +202,7 @@ app.get('/addFavorite/', function(req, res) {
             recipeImage: req.query.img,
             recipeTitle: req.query.title,
             recipeDesc: req.query.desc,
+            ingredients: req.query.ing
             
         }
     })
@@ -214,18 +224,19 @@ app.get('/removeFavorite/:recipeIdx', function(req, res) {
     var userEmail = req.session.username;
     console.log(req.params.recipeIdx);
     var recipeIdx = req.params.recipeIdx;
+
     if (!recipeIdx){
         console.log("aint no index here!", recipeIdx);
     } else {
         console.log("your recipe index is ", recipeIdx);
     }
 
-        //db.Accounts.findOne({ where: {email: userEmail} }).then(user => {
-        //    db.RecipeBox.create({ userID: user.userID, recipeID: recipeIdx })
-        //    .then((created)=>{
-        //      res.redirect('/index', 302);
-        //    })
-        //});
+        db.Accounts.findOne({ where: {email: userEmail} }).then(user => {
+            db.RecipeBox.destroy({ where: {userID: user.userID, recipeID: recipeIdx }})
+            .then((destroyed)=>{
+                console.log("entry destroyed!");
+            })
+        });
  })
 
 //route to log out//
@@ -239,7 +250,7 @@ app.get('/logOut', (req, res) => {
 //sync database with sequelize
 db.sequelize.sync().then(function () {
 
-
+    //------------Uncomment for database starter recipe------//
     // db.Recipe.create(thingToSave).then(function (stuffFromSQL) {
     //     console.log(stuffFromSQL);
     // });

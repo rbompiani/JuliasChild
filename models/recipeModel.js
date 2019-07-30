@@ -36,10 +36,17 @@ module.exports = function(sequelize, DataTypes) {
         type: DataTypes.STRING,
         validate: {
           len: {
-            args: [1, 3000]      
+            args: [1, 5000]      
           }
-        },  
-        allowNull: false
+        }
+      },
+      ingredients: {
+        type: DataTypes.STRING,
+        validate: {
+          len: {
+            args: [1, 5000]      
+          }
+        }
       }
     });
     return Recipe;

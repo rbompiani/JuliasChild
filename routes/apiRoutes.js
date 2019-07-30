@@ -50,11 +50,14 @@ module.exports = function(app) {
 
                parsedBody.hits.forEach(function (item) {
 
+                  var ingredients = item.recipe.ingredientLines;
+
                    foo.push({
                       recipeTitle: item.recipe.label,
                       recipeImage: item.recipe.image,
-                      ingredientLines: item.recipe.ingredientLines,
-                      recipeDesc: item.recipe.healthLabels
+                      ingredientArray: ingredients,
+                      recipeDesc: item.recipe.healthLabels,
+                      ingredients: item.recipe.ingredientLines
                    });
                   
               });
