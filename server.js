@@ -141,13 +141,18 @@ app.get('/addrecipe', (req, res) => {
 
 //should submit-recipe to database//
 app.post('/submit-recipe', (req, res) => {
-    console.log('alert routing');
+    console.log('storing a recipe...');
+
     var recipeImage=("/images/fooddefault.jpeg");
+    if(req.body.recipeImage){
+        recipeImage = req.body.recipeImage;
+    }
     var recipeTitle = req.body.recipeTitle;
     var recipeDesc = req.body.recipeDesc;
     var instructions = req.body.instructions;
-    var ingredientLines= req.body.ingredientLines;   // <--- THIS ISNT WORKING-sam//
-    console.log(recipeTitle, recipeDesc, instructions);
+    var ingredientLines = req.body.recipeIngredients;  
+
+
    if (recipeTitle && recipeDesc && instructions) {
         db.Recipe
             .findOrCreate({
@@ -157,12 +162,13 @@ app.post('/submit-recipe', (req, res) => {
                     recipeTitle: recipeTitle,
                     recipeDesc: recipeDesc,
                     instructions: instructions,
+                    ingredients: ingredientLines
                    
                 }
             })
             .then(([recipe, created]) => {
                 if (!created) {
-                    res.send('You seem to be missing some information...');
+                    res.send('Something went wrong');
                     res.end();
                 }
                 var userEmail = req.session.username;

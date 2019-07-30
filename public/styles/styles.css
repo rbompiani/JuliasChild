@@ -63,7 +63,7 @@ a:hover {
 }
 
 .largeForm {
-  max-width: 400px;
+  max-width: 600px;
   margin: auto
 }
 
@@ -97,6 +97,19 @@ a:hover {
       padding: 10px;
     margin: 20px 20px 20px 20px;
     font-size: 20px;
+  }
+
+  .newUser{
+    max-width:700px;
+
+  }
+
+  .dummyCard{
+    height: 200px;
+    background-color: transparent;
+    border-radius: 20px;
+    border: 6px dashed white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2); 
   }
 
 .fas{

@@ -1,17 +1,17 @@
 <div class="largeForm">
 
-  <form action="/submit-recipe" class="container mx-5" method="post">
+  <form action="/submit-recipe" class="container" method="post">
 
     {{!-- add image --}}
     <div class="form-group">
       <label for="recipeImage">Recipe Title:</label>
-      <input type="text" class="form-control" name="recipeImage" placeholder="'Nachos'">
+      <input type="text" class="form-control" name="recipeTitle" placeholder="'Nachos'">
     </div>
 
     {{!-- add title --}}
     <div class="form-group">
       <label for="addRecipeTitle">Recipe Image:</label>
-      <input type="text" class="form-control" name="recipeTitle" placeholder="'Nachos'">
+      <input type="text" class="form-control" name="recipeImage" placeholder="'http://...">
     </div>
   
     {{!-- add description --}}
@@ -35,7 +35,7 @@
           <option>4</option>
           <option>5</option>
         </select>
-        <select class="form-control col-3" id="addRecipeIngredientsID">
+        <select class="form-control col-4" id="addRecipeIngredientsID">
           <option>Teaspoon</option>
           <option>Tablespoon</option>
           <option>Cup</option>
@@ -43,9 +43,9 @@
           <option>Dash</option>
         </select>
         <input type="input" class="form-control col-5" id="ingredientInputBox" placeholder="'ie: butter'">
-        <input class="btn btn-primary col-2" id="addIngredientBttn" type="submit" value="Submit">
+        <input class="btn btn-primary font-weight-bold col-1" id="addIngredientBttn" type="submit" value="+">
       </div> 
-      <textarea class="form-control" id="lineForAddedIngredient" rows="3" readonly></textarea>      
+      <textarea class="form-control" id="lineForAddedIngredient" name="recipeIngredients" rows="3" readonly></textarea>      
   </div>
 
     
