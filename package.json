@@ -15,9 +15,6 @@
     "require": "^2.4.20",
     "sequelize": "^5.10.2"
   },
- 
-
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"

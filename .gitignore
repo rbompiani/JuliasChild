@@ -1,3 +1,4 @@
 /node_modules
-/config/config.json
-
+npm-debug.log
+.DS_Store
+/*.envnode_modules
