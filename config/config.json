@@ -4,11 +4,11 @@
       "password": "Sgr31087!",
       "database": "recipebox_db",
       "host": "127.0.0.1",
-      "dialect": "mysql2"
+      "dialect": "mysql"
     },
     "production": {
       "use_env_variable": "mysql://gj0iwkmk3xudmuw1:vnotlv2r67kmr95d@lg7j30weuqckmw07.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/i74gva9gjn561015",
-      "dialect": "mysql2"
+      "dialect": "mysql"
     }
   }
 
