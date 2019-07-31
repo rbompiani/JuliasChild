@@ -3,7 +3,8 @@ module.exports = function(app) {
     
     // Load index page
     app.get("/server.js", function(req, res) {
-      
+      if(!req.session.loggedin){
+        res.redirect('/');}
         });
       };
       const request = require("request");
@@ -17,6 +18,10 @@ module.exports = function(app) {
       module.exports = function(app) {
        
         app.get("/api/recipes/:search", function (req, res) {
+          if(!req.session.loggedin){
+            res.redirect('/');
+        } else {
+          
           // get the q parameter from the request
           var foo=[];
         //   var array={'test':'vars'};
@@ -63,6 +68,7 @@ module.exports = function(app) {
               });
               res.render("index", {data: foo})
           });
+        }
         });
     }
   
