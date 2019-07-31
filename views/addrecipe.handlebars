@@ -1,0 +1,76 @@
+<div class="largeForm">
+
+  <form action="/submit-recipe" class="container" method="post">
+
+    {{!-- add image --}}
+    <div class="form-group">
+      <label for="recipeImage">Recipe Title:</label>
+      <input type="text" class="form-control" name="recipeTitle" placeholder="'Nachos'">
+    </div>
+
+    {{!-- add title --}}
+    <div class="form-group">
+      <label for="addRecipeTitle">Recipe Image:</label>
+      <input type="text" class="form-control" name="recipeImage" placeholder="'http://...">
+    </div>
+  
+    {{!-- add description --}}
+    <div class="form-group">
+      <label for="addRecipeDescription">Description:</label>
+      <textarea class="form-control" name="recipeDesc" rows="3"></textarea>
+    </div>
+
+
+    {{!-- ingredients --}}
+  <div class="form-group">
+      <label for="addRecipeIngredients">Ingredients:</label>
+      <div class="row mx-1">
+        <select class="form-control col-2" id="addRecipeMeasurement">
+          <option>1/8</option>
+          <option>1/4</option>
+          <option>1/2</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+        <select class="form-control col-4" id="addRecipeIngredientsID">
+          <option>Teaspoon</option>
+          <option>Tablespoon</option>
+          <option>Cup</option>
+          <option>Pinch</option>
+          <option>Dash</option>
+        </select>
+        <input type="input" class="form-control col-5" id="ingredientInputBox" placeholder="'ie: butter'">
+        <input class="btn btn-primary font-weight-bold col-1" id="addIngredientBttn" type="submit" value="+">
+      </div> 
+      <textarea class="form-control" id="lineForAddedIngredient" name="recipeIngredients" rows="3" readonly></textarea>      
+  </div>
+
+    
+    {{!-- Instructions/Directions --}}
+    <div class="form-group">
+      <label for="instructions">Recipe Directions:</label>
+      <textarea class="form-control" name="instructions" rows="3"></textarea>
+    </div>
+      {{!-- Submit --}}
+    <input class="btn btn-primary" id="submitButtonAddRecipeFinal" type="submit" value="Submit This Recipe To Your Box!">
+  </form>
+</div> 
+
+
+<script>
+
+ $("#addIngredientBttn").on("click", function (event) {   
+                event.preventDefault();
+                console.log("buttons clicked is working");
+                var addedIngredient= $("#ingredientInputBox").val();
+                var addedSizeIngredient=$("#addRecipeIngredientsID").val();
+                var addRecipeMeasurement=$("#addRecipeMeasurement").val();
+                console.log("addedsize is working : " + addedSizeIngredient);
+                
+                console.log("addedIngredient is working : " + addedIngredient);
+                $("#lineForAddedIngredient").append(addRecipeMeasurement + " "+ addedSizeIngredient + " " +  addedIngredient  + "," + " ");
+ });
+</script>

@@ -1,0 +1,153 @@
+
+<div class="container">
+    {{!-- searches --}}
+    <div class="container">
+        <div class="search-box" id="searchContainer">
+            <!--<form action="/api/recipes/" method="get">-->
+                <input class="form-validate create-text" type="text" id="apiSearch" name="searchTerm" placeholder="Find new Recipes!">
+                <button type="submit" class="btn btn-primary btn-md" id="search-btn">
+                    <span id= "search-btnIcon" class="fa fa-search"></span> 
+                </button> 
+            <!--</form>-->
+                    
+
+
+        {{!-- create- box --}}
+            <input class="create-text" type="text" name="" placeholder="Create your own!">
+            <a class="create-btn" href='/addrecipe'>
+                <i class="far fa-plus-square"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- CARD -->
+<div class="album py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <!-- DUMMY CARDS -->
+            {{#unless data}}
+            <div class="row newUser justify-content-center">
+                <h2 class="text-center font-weight-bold">Let's Get Started!</h2>
+                <h3 class="text-center">Add recipes to your box by searching from our database, or creating your own.</h3>
+                <div class="col-md-4">
+                    <div class="card mb-4 dummyCard"></div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-4 dummyCard"></div>
+                </div>   
+                <div class="col-md-4">
+                    <div class="card mb-4 dummyCard"></div>
+                </div>  
+            </div>
+            {{/unless}}
+            {{#each data as |item i|}}
+            <div class="col-md-4">
+                <div class="card mb-4 recipeCards" data-toggle="modal" data-target="#recipeModal{{i}}" >
+                    <img class="card-img-top" data-src="{{recipeImage}}" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="{{recipeImage}}" data-holder-rendered="true">
+                    <div class="card-body">
+                        <h5 class="card-title">{{recipeTitle}}</h5>
+                        <p class="card-text">{{recipeDesc}}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <svg data-val="{{recipeID}}" 
+                                data-img="{{recipeImage}}" 
+                                data-title="{{recipeTitle}}" 
+                                data-desc="{{recipeDesc}}" 
+                                data-ing="{{ingredients}}" 
+                                xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" 
+                                {{#if data.recipeID}} class="favIcon fav"{{/if}}
+                                {{#unless data.recipeID}} class="favIcon"{{/unless}}>
+                                <path d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>
+
+
+{{#each data as |item i|}}
+<!-- create modals for each recipe -->
+<div id="recipeModal{{i}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content container">
+            <div class="row">
+
+                <!-- Left column of modal -->
+                <div class="col-md-6 p-0">
+                    <img src="{{recipeImage}}" class="modalImg">
+                    <div class="m-4">
+                        <h2>{{recipeTitle}}</h2>
+                        <h5>Ingredients</h5>
+                        <ul class="ingredientsList">
+                            {{#each ingredientArray}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Right column of modal -->
+                <div class="col-md-6 p-0">
+                    <div class="m-4">
+                        <h5>Directions</h5>
+                        <p class="directions">
+                            {{instructions}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{/each}}
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        
+        //construct get route for API search button
+        $("#search-btn").on("click", function() {
+
+            var searchTerm = $("#apiSearch").val().trim();
+            var newRoute = "/api/recipes/"+searchTerm;
+            console.log("routing to...",newRoute);
+
+            window.location.replace(newRoute);
+        });
+
+        //onclick functionality to save recipe
+    })
+
+    $(document).on("click", ".favIcon", function(){
+        var recImage = $(this).data("img");
+        var recTitle = $(this).data("title");
+        var recDesc = $(this).data("desc");
+        var recIng = $(this).data("ing");
+        console.log($(this).data("val"));
+
+        //cards with a value have been favorited - remove them
+        if ($(this).data("val")){
+            console.log("this is a saved recipe - deleting from favorites");
+            $.get("/removeFavorite/"+$(this).data("val"));
+            window.location.replace("/");
+        //cards without a value are from the api - add them to the recipeBox
+        } else {
+           console.log("this is NOT a saved recipe - saving to database");
+           $.get("/addFavorite/", {img:recImage, title:recTitle, desc: recDesc, ing:recIng}, function(){
+                window.location.replace("/");
+           })
+        }
+    })
+
+</script>
