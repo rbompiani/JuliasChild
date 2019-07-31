@@ -1,0 +1,36 @@
+<div class="smallForm">
+    {{#if login}}
+        <form action="/logIn" method="POST" class="userAuth">
+            <h1 class="logIn">Log In</h1>
+    {{else}}
+        <form action="/signUp" method="POST" class="userAuth">
+            <h1 class="signUp">Sign Up</h1>
+    {{/if}}
+
+            <div class="form-group">
+
+                <input type="email" class="form-control" name="userEmail" aria-describedby="emailHelp" placeholder="Enter email">
+
+                <input type="password" class="form-control" name="userPass" placeholder="Password">
+                <input class="btn btn-primary" id="submitLoginButton" type="submit" value="Submit">
+
+                {{#unless login}}
+                    <p>Already a Member?<a id="signUpButton" href="/auth" role="button">Log In!</a></p>
+                {{/unless}}
+
+            </div>
+
+    </form>    
+</div>
+
+
+
+
+<!-- if signing, make the form action a get request, if login, make post request -->
+<!-- create email input -->
+<!-- create password input -->
+<!-- submit button -->
+<!-- link to toggle sign in and log in -->
+
+
+{{!-- sam- create another page for adding a recipe --}}
