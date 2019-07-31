@@ -30,10 +30,10 @@ app.use(bodyParser.json());
 //app.set('views', path.join(__dirname, 'views'));
 
 
-app.set('views', path.join(__dirname, '..' 'views'));
+app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', exphbs({
     defaultLayout: 'main',
-    layoutsDir: path.join(__dirname, '..','views', 'layouts')}
+    layoutsDir: path.join(__dirname, 'views', 'layouts')}
 ));
 app.set("view engine", "handlebars");
 
