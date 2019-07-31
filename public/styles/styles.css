@@ -6,13 +6,14 @@
     padding-top: 50px;
   }
 
-  .mainBody{
+.mainBody{
     background-image: url(/images/cboard2.jpeg);
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-attachment: fixed;
     font-family: 'Exo', sans-serif;
 }
+
 #mainBodyID{
     /* font-family: 'Tangerine', cursive; */
     font-family: 'Exo', sans-serif;
@@ -112,36 +113,15 @@ a:hover {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2); 
   }
 
-.fas{
-color: red;
-width: 40px;
-height: 40px;
-display: flex;
-justify-content: center;
-align-items: center;
-
-}
-.far{
-  color: red;
-  font-weight: bold;
-}
-  .heartImage{
-      width: 16px;
-      height: 16px;
-      cursor: pointer; 
-      color: red;
-  }
-
 .recipeCards{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5); 
 }
-/* #cardIDtoMatch{
-    font-size: 30px;
-} */
+
                                                   /* add recipe page */
-  #addRecipeForm{
-    font-size: 25px;
-  }
+#addRecipeForm{
+  font-size: 25px;
+}
+
 #addRecipeMeasurement, #addRecipeIngredientsID, #ingredientInputBox, #exampleFormControlInput1, #lineForAddedIngredient{
   font-size: 15px;
 }
