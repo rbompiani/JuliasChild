@@ -27,6 +27,7 @@ app.use(bodyParser.json());
 
 //use handlebars//
 app.engine("handlebars", exphbs({ defaultLayout: "main", extname: '.handlebars' }));
+app.set('views', path.join(__dirname, 'views'));
 app.set("view engine", "handlebars");
 
 //use session//
