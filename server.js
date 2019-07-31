@@ -43,7 +43,7 @@ app.get('/', (req, res) => {
     if (req.session.loggedin) {
 		res.redirect('/index');
 	} else {
-        res.render('./signIn', { title: "Welcome to Julia's Child!" });
+        res.render('signIn', { title: "Welcome to Julia's Child!" });
 	}
 });
 
