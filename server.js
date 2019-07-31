@@ -43,7 +43,7 @@ app.get('/', (req, res) => {
     if (req.session.loggedin) {
 		res.redirect('/index');
 	} else {
-        res.render('signIn', { title: "Welcome to Julia's Child!" });
+        res.render('./signIn', { title: "Welcome to Julia's Child!" });
 	}
 });
 
@@ -129,7 +129,7 @@ app.get('/index', (req, res) => {
                         recipe.ingredientArray.pop();
                         console.log(recipe.ingredients);
                     })
-                   res.render('index', {
+                   res.render('./index', {
                       title: "Your Recipe Box",
                       data: recipes
                   });
@@ -141,102 +141,119 @@ app.get('/index', (req, res) => {
 
 //route to addrecipe//
 app.get('/addrecipe', (req, res) => {
-    res.render('addrecipe', { title: "Add A Recipe" });
+    if(!req.session.loggedin){
+        res.redirect('/');
+    } else {
+        res.render('addrecipe', { title: "Add A Recipe" });
+    }
 });
 
 //should submit-recipe to database//
 app.post('/submit-recipe', (req, res) => {
     console.log('storing a recipe...');
 
-    var recipeImage=("/images/fooddefault.jpeg");
-    if(req.body.recipeImage){
-        recipeImage = req.body.recipeImage;
-    }
-    var recipeTitle = req.body.recipeTitle;
-    var recipeDesc = req.body.recipeDesc;
-    var instructions = req.body.instructions;
-    var ingredientLines = req.body.recipeIngredients;  
+    if(!req.session.loggedin){
+        res.redirect('/');
+    } else {
+        var recipeImage=("/images/fooddefault.jpeg");
+        if(req.body.recipeImage){
+            recipeImage = req.body.recipeImage;
+        }
+        var recipeTitle = req.body.recipeTitle;
+        var recipeDesc = req.body.recipeDesc;
+        var instructions = req.body.instructions;
+        var ingredientLines = req.body.recipeIngredients;  
 
 
-   if (recipeTitle && recipeDesc && instructions) {
-        db.Recipe
-            .findOrCreate({
-                where:
-                {
-                    recipeImage: recipeImage,
-                    recipeTitle: recipeTitle,
-                    recipeDesc: recipeDesc,
-                    instructions: instructions,
-                    ingredients: ingredientLines
-                   
-                }
-            })
-            .then(([recipe, created]) => {
-                if (!created) {
-                    res.send('Something went wrong');
-                    res.end();
-                }
-                var userEmail = req.session.username;
+    if (recipeTitle && recipeDesc && instructions) {
+            db.Recipe
+                .findOrCreate({
+                    where:
+                    {
+                        recipeImage: recipeImage,
+                        recipeTitle: recipeTitle,
+                        recipeDesc: recipeDesc,
+                        instructions: instructions,
+                        ingredients: ingredientLines
+                    
+                    }
+                })
+                .then(([recipe, created]) => {
+                    if (!created) {
+                        res.send('Something went wrong');
+                        res.end();
+                    }
+                    var userEmail = req.session.username;
 
-                db.Accounts.findOne({ where: {email: userEmail} }).then(user => {
-                    db.RecipeBox.create({ userID: user.userID, recipeID: recipe.recipeID })
-                    .then(created=>{
-                        res.redirect('/index', 302);
-                    })
+                    db.Accounts.findOne({ where: {email: userEmail} }).then(user => {
+                        db.RecipeBox.create({ userID: user.userID, recipeID: recipe.recipeID })
+                        .then(created=>{
+                            res.redirect('/index', 302);
+                        })
+                    });
+                    
                 });
-                
-            });
-    };
+        };
+    }
 })
 
 //route to search API//
 require("./routes/apiRoutes")(app);
 
 app.get('/addFavorite/', function(req, res) {
-    console.log("saving a recipe...");
+    if(!req.session.loggedin){
+        res.redirect('/');
+    } else {
+        console.log("saving a recipe...");
 
-    db.Recipe
-    .findOrCreate({
-        where:
-        {
-            recipeImage: req.query.img,
-            recipeTitle: req.query.title,
-            recipeDesc: req.query.desc,
-            ingredients: req.query.ing
+        db.Recipe
+        .findOrCreate({
+            where:
+            {
+                recipeImage: req.query.img,
+                recipeTitle: req.query.title,
+                recipeDesc: req.query.desc,
+                ingredients: req.query.ing
+                
+            }
+        })
+        .then(([recipe, created]) => {
+            var userEmail = req.session.username;
+
+            db.Accounts.findOne({ where: {email: userEmail} }).then(user => {
+                db.RecipeBox.create({ userID: user.userID, recipeID: recipe.recipeID })
+                .then((created)=>{
+                    console.log("ITWORKED!");
+                    res.redirect(302, '/index');
+                })
+            });
             
-        }
-    })
-    .then(([recipe, created]) => {
-        var userEmail = req.session.username;
-
-        db.Accounts.findOne({ where: {email: userEmail} }).then(user => {
-            db.RecipeBox.create({ userID: user.userID, recipeID: recipe.recipeID })
-            .then((created)=>{
-                console.log("ITWORKED!");
-                res.redirect(302, '/index');
-            })
-        });
-        
-    });
+        });        
+    }
+    
  })
 
 app.get('/removeFavorite/:recipeIdx', function(req, res) {
-    var userEmail = req.session.username;
-    console.log(req.params.recipeIdx);
-    var recipeIdx = req.params.recipeIdx;
-
-    if (!recipeIdx){
-        console.log("aint no index here!", recipeIdx);
+    if(!req.session.loggedin){
+        res.redirect('/');
     } else {
-        console.log("your recipe index is ", recipeIdx);
-    }
+        var userEmail = req.session.username;
+        console.log(req.params.recipeIdx);
+        var recipeIdx = req.params.recipeIdx;
 
-        db.Accounts.findOne({ where: {email: userEmail} }).then(user => {
-            db.RecipeBox.destroy({ where: {userID: user.userID, recipeID: recipeIdx }})
-            .then((destroyed)=>{
-                console.log("entry destroyed!");
-            })
-        });
+        if (!recipeIdx){
+            console.log("aint no index here!", recipeIdx);
+        } else {
+            console.log("your recipe index is ", recipeIdx);
+        }
+
+            db.Accounts.findOne({ where: {email: userEmail} }).then(user => {
+                db.RecipeBox.destroy({ where: {userID: user.userID, recipeID: recipeIdx }})
+                .then((destroyed)=>{
+                    console.log("entry destroyed!");
+                })
+            });
+    }
  })
 
 //route to log out//
