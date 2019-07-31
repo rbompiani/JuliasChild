@@ -43,7 +43,7 @@ app.get('/', (req, res) => {
     if (req.session.loggedin) {
 		res.redirect('/index');
 	} else {
-        res.render('signIn', { title: "Welcome to Julia's Child!" });
+        res.render('./signIn', { title: "Welcome to Julia's Child!" });
 	}
 });
 
@@ -129,7 +129,7 @@ app.get('/index', (req, res) => {
                         recipe.ingredientArray.pop();
                         console.log(recipe.ingredients);
                     })
-                   res.render('index', {
+                   res.render('./index', {
                       title: "Your Recipe Box",
                       data: recipes
                   });
