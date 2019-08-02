@@ -33,7 +33,7 @@ module.exports = function(sequelize, DataTypes) {
         }
       },
       instructions: {
-        type: DataTypes.STRING,
+        type: DataTypes.TExt,
         validate: {
           len: {
             args: [1, 5000]      
