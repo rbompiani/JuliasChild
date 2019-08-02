@@ -79,7 +79,7 @@ app.post('/signUp', function(req, res) {
                     req.session.username = userEmail;
                     res.redirect('/index');
                 } else {
-                    res.send('This account already exists!');
+                    res.render('signIn', { title: "Welcome to Julia's Child!", userExists:"true" });
                 }
             })
     } else {
@@ -109,7 +109,7 @@ app.post('/logIn', function(req, res) {
                     req.session.username = userEmail;
                     res.redirect('/index');
                 } else {
-                    res.send('Wrong email and password!');
+                    res.render('signIn', { title: "Welcome to Julia's Child!", login:"true", loginError:"true" });
                 }
             })
 	} else {
