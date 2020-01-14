@@ -5,26 +5,29 @@ Julia's Child is a digital recipe box that allows users to add, find, and collec
 Add and save your own private recipes, or search and save other recipes.
 
 ## Features
-#### 1) Log In
+#### 1. Log In
 - Passwords are  stored in an MYSQL Database
 - Forms implement client-side authentication
-#### 2) Create & Store Recipes
+![](http://rbompiani.com/images/projects/recipe1.jpg)
+#### 2. Create & Store Recipes
 - Recipes are validated and stored in MYSQL database, linked by user
 - Forms implement client-side authentication
-#### 3) Search For New Recipes
+![](http://rbompiani.com/images/projects/recipe2.jpg)
+
+#### 3. Search For New Recipes
 - Search the Edemame API by keyword for new recipes
 
 <p>&nbsp;</p>
 
 ## Technologies
-#### 1) HTML/CSS
+#### 1. HTML/CSS
 - Bootstrap
 - Handlebars
-#### 2) NodeJS
+#### 2. NodeJS
 - Express
 - Express-Session
 - Sequelize
-#### 4) MYSQL
+#### 4. MYSQL
 - Relational Database Tables
 <p>&nbsp;</p>
 
@@ -48,3 +51,4 @@ Thanks to the following ladies for their help in giving the project wings:
 
 ## Project status
 Development is closed for this project. 
+See [iHeartRecipes](https://github.com/rbompiani/iHeartRecipes/blob/master/README.md) for a newer version, built in ReactJS.
